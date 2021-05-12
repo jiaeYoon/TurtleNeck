@@ -1,0 +1,194 @@
+:root {
+  /* 배경색 */
+  --background-color: #fcf2e8;
+  --book1-color: #4A8BCC;
+  --book2-color: #3D78B3;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+}
+
+/* header */
+header {
+  margin-bottom: 100px;
+}
+
+#wave {
+  width: 100%;
+  height: 100px;
+  z-index: 1;
+}
+
+#logo {
+  margin: 10px;
+  height: 55px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+header i {
+  margin: 15px;
+  font-size: 40px;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* tutorial */
+.tutorial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book1 {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 45vw;
+  min-width: 300px;
+  max-width: 500px;
+  height: 50vh;
+  min-height: 300px;
+  background-color: var(--book1-color);
+}
+
+.book1.image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.page {
+  width: 90%;
+  height: 90%;
+  background-color: white;
+}
+
+.page.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* exercise image */
+#ex_img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+/* exercise information */
+#ex_name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 5%;
+}
+
+#ex_expl {
+  font-size: 1rem;
+  margin: 5%;
+  max-height: 35%;
+  overflow: auto;
+}
+
+.book2 {
+  width: 3vh;
+  max-width: 20px;
+  height: 50vh;
+  min-height: 300px;
+  background-color: var(--book2-color);
+}
+
+.page.info {
+  position: relative;
+}
+
+/* timer & button */
+.page .additional {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-bottom: 5%;
+  position: absolute;
+  bottom: 0px;
+}
+
+/* timer */
+.timer {
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.timer i {
+  font-size: 30px;
+}
+
+.timer span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* bar */
+#out_bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 7px;
+  background-color: #d3d3d3;
+  margin-bottom: 20px;
+}
+
+#in_bar {
+  width: 60%;
+  height: 12px;
+  border-radius: 7px;
+  background-color: #f47575;
+}
+
+/* buttons */
+.btn {
+  font-size: 35px;
+  cursor: pointer;
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+/* overview */
+.overview {
+  display: flex;
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  background-color: #d3d3d3;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.circle img {
+  width: 55%;
+  height: 55%;
+}
