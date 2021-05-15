@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-    integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+  integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   <link rel="stylesheet" href="exercise.css">
+  <script src="exercise.js" defer></script>
     <title>운동하기</title>
 </head>
 
@@ -15,7 +16,9 @@
   <header>
     <img id="wave" src="sea.svg" alt="wave">
     <!--div class="header"-->
-    <img id="logo" src="turtleneck_logo.svg" alt="logo">
+      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
+      <a href="mypage.html"><img id="logo" src="turtleneck_logo.svg" alt="logo"></a>
+    <!-- 로그아웃 -->
     <i class="fas fa-user-circle"></i>
     <!--/div-->
   </header>
@@ -54,9 +57,10 @@
               
               <!-- buttons -->
               <div class="btn">
-                <i class="fas fa-chevron-circle-left"></i>
-                <i class="fas fa-pause-circle"></i>
-                <i class="fas fa-chevron-circle-right"></i>
+                <i id="prev" class="fas fa-chevron-circle-left"></i>
+                <i id="pause" class="fas fa-pause-circle"></i>
+                <!--i id="pause" class="fas fa-play-circle"></i-->
+                <i id="next" class="fas fa-chevron-circle-right"></i>
               </div>
           </div>
         </div>
