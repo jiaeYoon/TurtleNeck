@@ -67,7 +67,6 @@ const calendar = document.querySelector('.calendar > tbody');
 
 // 달력 형태 만들기
 const days = Math.ceil((f_day + l_date) / 7);
-console.log(days);
 for (let i = 0; i < days; i++)
   insertRow();
 
@@ -77,7 +76,7 @@ for (let i = 0; i < days; i++) {
   //console.log(week[i]);
 }
 
-for (let i = 0; i < f_day; i++){
+for (let i = 0; i < f_day; i++) {
   week[0].childNodes[i].textContent = "";
 }
 
@@ -106,8 +105,8 @@ let c_day = f_day;  // 요일 값 -> 초기 값 : 첫째 날 요일
 let index = 0;
 
 for (let i = 1; i <= l_date; i++) {
-  if (c_day >= 7) { 
-    index++; 
+  if (c_day >= 7) {
+    index++;
     c_day %= 7;
   }
   week[index].childNodes[c_day].textContent = i;
@@ -121,4 +120,20 @@ for (let i = 1; i <= l_date; i++) {
 
 /* Change StyleSheet */
 // db 연동해서 운동한 날짜 받아와서 변수에 저장
-// 그 값이 true면 stamp 이미지가 보이도록(visible: )
+// 그 값이 true면 stamp 이미지가 보이도록(visibility: visible)
+
+
+// function stamp_on() {
+//   //var a = db 연동한 값 date
+//   //var b = db 연동한 값 doExercise
+//   //var 그 날짜의 스탬프 = 스탬프 고르는 함수( 누적일자에 따라 다른 스탬프);
+
+//   if (a == 날짜 && (그 날짜의 스탬프.style.visibility == "hidden" || 그 날짜의 스탬프.style.visibility = "")
+//   {
+//     //이미지 변수(stamp??).style.visibility =="visible";
+//   }
+//   if (a != 날짜 && (그 날짜의 스탬프.style.visibility == "visible"))
+//   {
+//     스탬프.style.vvisibility = "hidden";
+//   }
+// }
