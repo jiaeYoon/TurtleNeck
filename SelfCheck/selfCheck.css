@@ -1,0 +1,89 @@
+:root {
+  /* 배경색 */
+  --background-color: #fcf2e8;
+  --button-color: #4A8BCC;
+  --button-hover-color: #3D78B3;
+}
+
+@font-face {
+  font-family: 'MapoPeacefull';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  font-family: 'MapoPeacefull';
+}
+
+/* header */
+header {
+  margin-bottom: 100px;
+}
+
+#wave {
+  width: 100%;
+  height: 100px;
+  z-index: 1;
+}
+
+#logo {
+  margin: 10px;
+  height: 55px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+header i {
+  margin: 15px;
+  font-size: 40px;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* main */
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding: 20px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+  text-align: center;
+}
+
+#result {
+  border: none;
+  float: right;
+  margin: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.5s;
+  background: var(--button-color);
+  color: white;
+  font-size: 1rem;
+  font-family: 'MapoPeacefull';
+}
+
+#result:hover {
+  background: var(--button-hover-color);
+  color: white;
+}

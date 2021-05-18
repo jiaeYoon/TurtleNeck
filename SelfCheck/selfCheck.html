@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자가진단</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+  integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <link rel="stylesheet" href="selfCheck.css">
+  <script src="selfCheck.js"></script>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <img id="wave" src="sea.svg" alt="wave">
+    <!--div class="header"-->
+      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
+      <a href="mypage.html"><img id="logo" src="turtleneck_logo.svg" alt="logo"></a>
+    <!-- 로그아웃 -->
+    <i class="fas fa-user-circle"></i>
+    <!--/div-->
+  </header>
+
+  <!-- 본문 -->
+  <main class="main">
+    <div class="container">
+      <h1>자가진단</h1>
+      <p>n개 이상에 해당하면 당신은 거북목입니다.</p>
+      <!--Check List-->
+      <form method="POST" action="checkResult.php">
+        <label><input type="checkbox" name="check" value="1">리스트 1</label><br/>
+        <label><input type="checkbox" name="check" value="2">리스트 2</label><br/>
+        <label><input type="checkbox" name="check" value="3">리스트 3</label><br/>
+        <label><input type="checkbox" name="check" value="4">리스트 4</label><br/>
+        <button id="result" type="submit">결과 확인하기</button>
+    </form>
+  </div>
+  </main>
+
+</body>
+</html>
