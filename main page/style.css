@@ -4,12 +4,13 @@
 
 body {
   margin: 0;
-  /*background-color: var(--background-color);*/
   width: 100%;
   height: 100%;
 }
 
 .main {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   background-color: var(--background-color);
@@ -21,6 +22,7 @@ body {
 
 .beach {
   width: 100%;
+  min-height: 300px;
   position: absolute;
   top: 0;
   left: 0;
@@ -28,10 +30,14 @@ body {
 }
 
 .logo {
+  object-fit: contain;
   width: 40%;
+  max-width: 600px;
+  min-width: 300px;
   position: absolute;
   top: 5%;
-  left: 30%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
 }
 
@@ -58,11 +64,120 @@ body {
 
 .login__box {
   width: 30%;
-  height: 40%;
-  background-color: white;
+  min-width: 300px;
+  max-width: 450px;
+  height: 45%;
+  min-height: 400px;
+  max-height: 500px;
+  background-color: rgba(255, 255, 255, 0.5);
   position: absolute;
-  top: 30%;
-  left: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 4;
   display: none;
+}
+
+.login__inbox {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login__text {
+  font-size: 40px;
+  color: white;
+}
+
+.login__form {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.login__id,
+.login__pw {
+  margin: 5px;
+}
+
+.login__input i {
+  width: 35px;
+  height: 35px;
+  margin-right: 0;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 8px;
+  color: #333333;
+  font-size: 20px;
+}
+
+.login__input input {
+  height: 20px;
+  border: 0px;
+  border-radius: 8px;
+  margin-left: 0;
+  padding: 5px 5px;
+  background-color: white;
+}
+
+.login__input input:focus {
+  outline: none;
+}
+
+.login__btn input {
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  background-color: #19bc9c;
+  color: white;
+  font-size: 12pt;
+  cursor: pointer;
+}
+
+.copyright {
+  width: 80%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.basecamp {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+}
+
+.copyright a {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  align-items: center;
+}
+
+.copyright i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.copyright a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.copyright div {
+  display: flex;
+  align-items: center;
 }
