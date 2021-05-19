@@ -59,21 +59,40 @@ header i {
   align-items: center;
 }
 
-.container {
-  padding: 20px;
-  width: 60%;
-  background-color: rgba(255, 255, 255, 0.8);
+.beach {
+  width: 100%;
+  min-height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
-h1 {
+.turtle {
+  width: 10%;
+  position: absolute;
+  top: 75%;
+  left: 6%;
+  transform: rotate(30deg);
+  z-index: 2;
+}
+
+.container {
+  padding: 20px;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+h1, h4 {
   text-align: center;
 }
 
 #result {
   border: none;
   float: right;
-  margin: 0.5rem;
-  padding: 0.3rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.5s;

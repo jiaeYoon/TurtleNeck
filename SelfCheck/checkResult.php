@@ -27,17 +27,12 @@
     <img class="turtle" src="turtle.svg" alt="turtle">
     
     <div class="container">
-      <h1>자가진단</h1>
+      <h1>자가진단 결과</h1>
       <h4>현재 상태를 체크해보세요.</h4>
-      <!--Check List-->
-      <form method="POST" action="checkResult.php">
-        <label><input type="checkbox" name="check" value="1">어깨와 목 주위가 자주 뻐근하다.</label><br/>
-        <label><input type="checkbox" name="check" value="2">옆에서 보면 고개가 어깨보다 앞으로 빠져나와 있다.</label><br/>
-        <label><input type="checkbox" name="check" value="3">등이 굽어 있다.</label><br/>
-        <label><input type="checkbox" name="check" value="4">쉽게 피로하고 두통이 있으며 어지럼증을 느낀다.</label><br/>
-        <label><input type="checkbox" name="check" value="5">잠을 자도 피곤하고 목덜미가 불편하다.</label><br/>
-        <button id="result" type="submit">결과 확인하기</button>
-    </form>
+      <!-- 자가진단 결과-->
+      <?php
+        echo $_POST["check"];
+      ?>
   </div>
   </main>
 
