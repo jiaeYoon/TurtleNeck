@@ -12,7 +12,7 @@ $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_array($result);
 $hashedPassword = $row['pw'];
-$row['u_id'];
+$row['id'];
 
 foreach($row as $key => $r){
     echo "{$key} : {$r} <br>";
@@ -22,18 +22,19 @@ foreach($row as $key => $r){
 // 비밀번호 검증 로직을 실행하면 된다.
 $passwordResult = password_verify($password, $hashedPassword);
 
-echo "{$passwordResult}";
+//echo "{$passwordResult}";
 if (password_verify($password, $hashedPassword)) {
     // 로그인 성공
     // 세션에 id 저장
     session_start();
-    $_SESSION['userId'] = $row['u_id'];
+    $_SESSION['userId'] = $row['id'];
+    echo 'hi';
     echo $_SESSION['userId'];
 ?>
     <script>
     document.write(<?= $passwordResult?>);
-        //location.href = "challenge.php";
-        location.href="complete.php";
+        location.href = "challenge.php";
+        //location.href="complete.php";
     </script>
 <?php
 } else {
@@ -41,6 +42,8 @@ if (password_verify($password, $hashedPassword)) {
 ?>
     <script>
         alert("로그인에 실패하였습니다");
+        // 실패하면 다시 메인 화면으로
+        location.href = "index.html";
     </script>
 <?php
 }
