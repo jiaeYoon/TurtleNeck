@@ -23,7 +23,7 @@
 ?>
     <script>
         alert("회원가입이 완료되었습니다");
-        //location.href = "mainpage.html"; //메인페이지로 가기
+        //location.href = "mainpage.html"; //로그인창 또는 메인페이지로 이동하기
      </script>
  <?php
       }
