@@ -5,25 +5,30 @@
   mysqli_query($conn, "set session character_set_connection=utf8;");
   mysqli_query($conn, "set session character_set_results=utf8;");
   mysqli_query($conn, "set session character_set_client=utf8;");
+
+  /* 세션에 저장해둔 사용자 id값 가져오기 */
+  session_start();
+  $id = $_SESSION;
+  $id = implode("", $id);
   
-  $sql = "SELECT * FROM exercise ORDER BY e_id";
+  // shoulder, neck_shoulder, arm_shoulder, pelvic
+  $e_name = 'pelvic'; // 사용자의 선택을 받아올 수 있나?
+  $sql = "SELECT * FROM exercise WHERE e_name = '$e_name' ORDER BY e_id";
   $result = mysqli_query($conn, $sql);
 
-  $ex_names = array();
   $s_names = array();
   $s_nos = array();
   $s_times = array();
   $s_expls = array();
   
+  // 확인용
   $i = 0;
   while ($row = mysqli_fetch_row($result)) {
-    $ex_name = $row[1];
     $s_name = $row[2];
     $s_no = $row[3];
     $s_time = $row[4];
     $s_expl = nl2br($row[5]);
 
-    $ex_names[$i] = $ex_name;
     $s_names[$i] = $s_name;
     $s_nos[$i] = $s_no;
     $s_times[$i] = $s_time;
@@ -65,7 +70,7 @@
         <div class="book1 image">
           <div class="page image">
             <!-- image -->
-            <img id="ex_img" src="shoulder1.png" alt="exercise1">
+            <img id="ex_img" src="" alt="exercise1">
           </div>
         </div>
 
@@ -102,27 +107,14 @@
       </div>
 
       <!-- overview -->
-      <div class="overview">
-        <div class="circle">
-          <img src="shoulder1.png" alt="exercise1">
-        </div>
-        <div class="circle">
-          <img src="shoulder2.png" alt="exercise2">
-        </div>
-        <div class="circle">
-          <img src="shoulder3.png" alt="exercise3">
-        </div>
-        <div class="circle">
-          <img src="shoulder4.png" alt="exercise4">
-        </div>
-      </div>
+      <div class="overview"></div>
     </main>
   </body>
   <script>
     'use strict';
 
     /* 운동 관련 db값 받아오기 */
-    const ex_names = <?php echo json_encode($ex_names)?>;
+    const exercise_name = <?php echo json_encode($e_name)?>;
     const ex_stepNames = <?php echo json_encode($s_names)?>;
     const ex_stepNums = <?php echo json_encode($s_nos)?>;
     const ex_stepTimes = <?php echo json_encode($s_times)?>;
@@ -141,15 +133,21 @@
     const timer = document.querySelector('#ex_sec');
     const bar = document.querySelector('#in_bar');
 
+    // exercise steps
+    const stepCount = ex_stepNames.length;
+
     // exercise time
     let time = 0;
     let sec = 0;
-    let ex_time = 10;
-    //let ex_time = ex_stepTimes[0];
+    //let ex_time = 10;
+    let ex_time = ex_stepTimes[0];
+    timer.textContent = ex_time;
     let play = true;
 
     // exercise image
     const ex_image = document.querySelector('#ex_img');
+    ex_image.setAttribute('src', `${exercise_name}${ex_stepNums[0]}.png`);
+    console.log(ex_image.getAttribute('src'));
     let next_img;
     let index = 0;
     let done = 0;   // 동작 수행 여부 저장
@@ -162,6 +160,16 @@
     
     // overview에 노드 추가
     const overview = document.querySelector('.overview');
+    for (let i = 0; i < stepCount; i++) {
+      const overviewNode = document.createElement('div');
+      const overviewImg = document.createElement('img');
+      overviewImg.setAttribute('src', `${exercise_name}${ex_stepNums[i]}.png`);
+      overviewNode.appendChild(overviewImg);
+      overviewNode.setAttribute('class', 'circle');
+      overview.appendChild(overviewNode);
+    }
+
+    // overview 자식 노드 list
     const imgList = overview.children;
     
     // functions
@@ -182,10 +190,10 @@
     }
 
     function Timer() {
-      //if (sec === 0) timer.textContent = ex_time;
-
-      if (timer.textContent > 0 && index < imgList.length) {
-        timer.textContent--;
+      if (timer.textContent >= 0 && index < stepCount) {
+        if (timer.textContent > 0) {
+          timer.textContent--;
+        }
         sec++;
         bar.style.width = `${(sec / ex_time) * 100}%`;
         bar.style['transition-duration'] = '1s';
@@ -194,21 +202,20 @@
         // 일시정지 및 재시작
         pauseBtn.addEventListener('click', pauseplay);
       }
-
-      if (sec === ex_time + 1 && index < imgList.length) {
+      
+      if (sec == Number(ex_time) + 1 && index < stepCount) {
         sleep(2000);
-        if (index < imgList.length - 1) {
-          next_img = imgList[index + 1].firstChild.nextSibling.getAttribute('src');
-          ex_image.setAttribute('src', `${next_img}`);
+        if (index < stepCount - 1) {
+          next_img = `${exercise_name}${ex_stepNums[index + 1]}.png`;
+          ex_image.setAttribute('src', next_img);
         }
         
         // 초기화
-        if (index == imgList.length - 1) {
+        if (index == stepCount - 1) {
           timer.textContent = 0;
-          sec = ex_time;
         }
         else {
-          timer.textContent = ex_time;
+          timer.textContent = ex_stepTimes[index + 1];
           sec = 0;
           bar.style.width = '0%';
         }
@@ -220,20 +227,24 @@
         // 텍스트 바꾸기
         ex_name.textContent = ex_stepNames[index];
         ex_expl.innerHTML = ex_stepExpls[index];
-        //ex_time = ex_stepTimes[index];
+        ex_time = ex_stepTimes[index];
       }
       
       // 운동 종료 시
-      if (index == imgList.length) {
-        bar.style.width = `${(sec / ex_time) * 100}%`;
+      if (index == stepCount) {
+        if (done == stepCount) bar.style.width = '100%';
+        else bar.style.width = `${(sec / ex_time) * 100}%`;
+        ex_name.textContent = ex_stepNames[stepCount - 1];
+        ex_expl.innerHTML = ex_stepExpls[stepCount - 1];
         clearInterval(time);
-        //if (done == imgList.length) go_complete();
       }
+
+      if (done == stepCount) go_complete();
     }
 
 
 
-    /* button */
+    /* buttons */
     const prevBtn = document.querySelector('#prev');
     const pauseBtn = document.querySelector('#pause');
     const nextBtn = document.querySelector('#next');
@@ -255,10 +266,12 @@
     }
 
     // previous & next button
+    // 끝까지 다 넘겨서 파란색으로 바뀌고 다시 앞으로 돌아가면 안 됨
     prevBtn.addEventListener("click", () => {
       if (index > 0) {
-        const p_img = imgList[--index].firstChild.nextSibling.getAttribute('src');
-        ex_image.setAttribute('src', `${p_img}`);
+        const p_img = `${exercise_name}${ex_stepNums[--index]}.png`;
+        ex_image.setAttribute('src', p_img);
+        ex_time = ex_stepTimes[index];
         timer.textContent = ex_time;
         sec = 0;
         bar.style.width = '0%';
@@ -268,9 +281,10 @@
     });
 
     nextBtn.addEventListener("click", () => {
-      if (index < imgList.length - 1) {
-        const n_img = imgList[++index].firstChild.nextSibling.getAttribute('src');
-        ex_image.setAttribute('src', `${n_img}`);
+      if (index < stepCount - 1) {
+        const n_img = `${exercise_name}${ex_stepNums[++index]}.png`;
+        ex_image.setAttribute('src', n_img);
+        ex_time = ex_stepTimes[index];
         timer.textContent = ex_time;
         sec = 0;
         bar.style.width = '0%';
