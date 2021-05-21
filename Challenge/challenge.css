@@ -1,3 +1,4 @@
+
 /* month */
 .m_num {
   font-size: 30pt;
@@ -10,22 +11,27 @@
 }
 
 /* calendar */
+
 .calendar {
   border: 1px solid #7e7e7e;
   border-collapse: collapse;
+  width: 80%;
+  height: 100%;
+  padding-bottom: 5vh;
+  
 }
 
 th {
   background-color: #dddddd;
   border: 1px solid #7e7e7e;
-  width: 70px;
+  width: 10%;
   padding: 5px;
 }
 
 td {
   border: 1px solid #7e7e7e;
-  height: 40px;
-  padding: 5px;
+  padding: 0.5px;
+  vertical-align: top;
 }
 
 td i {
