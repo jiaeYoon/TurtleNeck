@@ -12,9 +12,9 @@
 <body>
   <!-- main page -->
   <div class="main">
-    <img class="beach" src="beach.svg" alt="main page">
-    <img class="logo" src="turtleneck_logo_color.svg" alt="TurtleNeck">
-    <img class="turtle" src="turtle.svg" alt="turtle">
+    <img class="beach" src="..\img\beach.svg" alt="main page">
+    <img class="logo" src="..\img\turtleneck_logo_color.svg" alt="TurtleNeck">
+    <img class="turtle" src="..\img\turtle.svg" alt="turtle">
   </div>
 
   <!-- login background -->
@@ -25,22 +25,22 @@
     <div class="login__inbox">
       <!-- login form -->
       <div class="login__text">LOGIN</div>
-      <form action="loginProcess.php" method="post" class="login__form">
+      <form action="..\signup\loginProcess.php" method="post" class="login__form">
         <!-- input ID & PW-->
         <div class="login__input">
           <div class="login__id">
             <i class="fas fa-user"></i>
-            <input type="text" name="userid" id="user__id">
+            <input type="text" name="userid" id="user__id" placeholder="ID">
           </div>
           <div class="login__pw">
             <i class="fas fa-key"></i>
-            <input type="password" name="userpw" id="user__pw">
+            <input type="password" name="userpw" id="user__pw" placeholder="Password">
           </div>
         </div>
         <!-- login & sign up-->
         <div class="login__btn">
           <input type="submit" value="로그인">
-          <input type="button" value="회원가입" onclick="location.href='signup.php'">
+          <input type="button" value="회원가입" onclick="location.href='../signup/signup.php'">
         </div>
       </form>
       
@@ -60,7 +60,7 @@
         <!-- team -->
         <div class="cr__team">
           <i class="far fa-copyright"></i>
-          <div class="cr__name">복3심1</div>
+          <div class="cr__name">Sookmyung IT Engineering IPS Team 복3심1</div>
         </div>
       </div>
     </div>
