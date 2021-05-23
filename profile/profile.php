@@ -5,7 +5,14 @@
   session_start();
   $id = $_SESSION;
   $id = implode("", $id);
-  
+
+  /* db에서 name값 가져옴 */
+  $sql = "SELECT name FROM user_info WHERE id='{$id}'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_row($result);
+  $name = $row[0];
+
+  /* db에서 운동횟수 값 가져옴 */
   $sql = "SELECT COUNT(*) FROM challenge WHERE id='{$id}'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_row($result);
@@ -27,9 +34,9 @@
   <!-- profile -->
   <div class="profile">
     <div class="character">
-      <img src="turtle.jpg">
+      <img style="width:60%; height:60%" src="..\img\turtle.jpg">
     </div> 
-    <div class="user_name">User_Name</div>
+    <div class="user_name"><?=$name?></div>
     <div class="ex">
       누적 운동 횟수: <span id="ex_time">
         <?=$count?>
