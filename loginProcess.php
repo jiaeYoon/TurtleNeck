@@ -33,7 +33,7 @@ if (password_verify($password, $hashedPassword)) {
 ?>
     <script>
     document.write(<?= $passwordResult?>);
-        location.href = "challenge.php";
+        location.href = "..\challenge\challenge.php";
         //location.href="complete.php";
     </script>
 <?php
