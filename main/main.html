@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>메인 페이지</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <img id="wave" src="../img/sea.svg" alt="wave">
+      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
+      <a href="main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <i class="fas fa-user-circle" id="profile"></i>
+      <!-- 말풍선 -->
+      <div class="tooltip">
+        <!-- 나중에 회원정보 추가하기 -->
+        <a href="../main/main.html">마이 페이지</a>
+        <hr/>
+        <a href="../signup/logoutProcess.php">로그아웃</a>
+      </div>
+    </header>
+
+    <!--순서대로 왼-오
+        1. 프로필/응원문구
+        2. 캘린더/운동바로가기
+        3. 배너
+    -->
+    <!-- 1. 프로필/응원문구-->
+    <div class="article">
+      <div class="article__top">
+        <div class="div_profile">
+          <iframe src="../profile/profile.php" name="profile" id="if_profile" scrolling="no"></iframe>
+        </div>
+
+        <!-- 2. 캘린더 -->
+        <div id="div_calendar">
+          <iframe src="../challenge/challenge.php" name="callender" id="callender"></iframe>
+        </div>
+      
+        <!-- 3. 배너 -->
+        <div class="section">
+          <input type="radio" name="slide" id="slide01" checked>
+          <input type="radio" name="slide" id="slide02">
+          <input type="radio" name="slide" id="slide03">
+          <div class="slidewrap">
+            <ul class="slidelist">
+              <!-- 슬라이드 영역 -->
+              <li class="slideitem">
+                <a href="https://map.naver.com/v5/search/%EC%A0%95%ED%98%95%EC%99%B8%EA%B3%BC" target='_blank'>
+                  <div class="textbox">
+                    <h3>가까운 병원</h3>
+                    <p>내 위치와 가까운 정형외과를<br> 안내해 드려요</p>
+                  </div>
+                  <img src="https://pbs.twimg.com/media/E1-c21aUYAcBVNL?format=png">
+                </a>
+              </li>
+              <li class="slideitem">
+                <a href="../selfcheck/SelfCheck.html">
+                  <div class="textbox">
+                    <h3>자가진단</h3>
+                    <p>지금 내 상태는 어떨까?</p>
+                  </div>
+                  <img src="https://pbs.twimg.com/media/E1-eOLoUcAIKnIL?format=png">
+                </a>
+              </li>
+              <li class="slideitem">
+                <a href="http://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31866" target='_blank'>
+                  <div class="textbox" target='_blank'>
+                    <h3>질환 정보</h3>
+                    <p>거북목 증후군이란?</p>
+                  </div>
+                  <img src="../img/bg.png">
+                </a>
+              </li class="slideitem">
+
+            </ul>
+            <!-- 페이징 -->
+            <ul class="slide-pagelist">
+              <li><label for="slide01"></label></li>
+              <li><label for="slide02"></label></li>
+              <li><label for="slide03"></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- +  운동 바로가기 -->
+      <!-- a를 누르면 php파일로 이동 후 각각num별로 다르게 세션에 저장해서 exercise로 넘기기 -->
+      <div class="exercise">
+        <h2>#운동하기🤸‍♂️! &nbsp;&nbsp; #3분_스트레칭</h2>
+        <div class="exercise__box">
+          <div class="exercise__btn" onClick="document.forms['formone'].submit()"; style="cursor:pointer;">
+            <form action="../exercise/exercise.php" method="GET" name="formone">
+              <input type="hidden" name="exercise" value="ex1">
+                <img src="../exercise/ex_image/neck_shoulder1.png" class="imges">
+                <p class="exercise__name">목, 어깨<br/>통증 예방 운동</p>
+            </form>
+          </div>
+          <div class="exercise__des">
+            <p><span class="des__detail">잘못된 컴퓨터 사용 자세로<br> 생긴 목과 어깨 통증을 예방하는 스트레칭</span><br><br>
+              스트레칭 부위: <span class="des__em">목, 어깨</span></p>
+          </div>
+        </div>
+
+        <div class="exercise__box">
+          <div class="exercise__btn" onClick="document.forms['formtwo'].submit()"; style="cursor:pointer;">
+            <form action="../exercise/exercise.php" method="GET" name="formtwo">
+              <input type="hidden" name="exercise" value="ex2">
+              <img src="../exercise/ex_image/shoulder4.png" class="imges">
+              <p class="exercise__name">어깨 스트레칭</p>
+            </form>
+          </div>
+          <div class="exercise__des">
+            <p><span class="des__detail">뭉친 어깨를 풀어주는 스트레칭</span><br><br>
+              스트레칭 부위: <span class="des__em">어깨</span></p>
+          </div>
+        </div>
+
+        <div class="exercise__box">
+          <div class="exercise__btn" onClick="document.forms['formthree'].submit()"; style="cursor:pointer;">
+            <form action="../exercise/exercise.php" method="GET" name="formthree">
+              <input type="hidden" name="exercise" value="ex3">
+              <img src="../exercise/ex_image/arm_shoulder1.png" class="imges">
+              <p class="exercise__name">팔, 어깨 스트레칭</p>
+            </form>
+          </div>
+          <div class="exercise__des">
+            <p><span class="des__detail">팔과 어깨 근육을 이완시켜줌으로써 통증을 줄여주는 스트레칭</span><br><br>
+              스트레칭 부위: <span class="des__em">팔, 어깨</span></p>
+          </div>
+        </div>
+          
+        <div class="exercise__box">
+          <div class="exercise__btn" onClick="document.forms['formfour'].submit()"; style="cursor:pointer;">
+            <form action="../exercise/exercise.php" method="GET" name="formfour">
+              <input type="hidden" name="exercise" value="ex4">
+              <img src="../exercise/ex_image/pelvic1.png" class="imges">
+              <p class="exercise__name">골반 스트레칭</p>
+            </form>
+          </div>
+          <div class="exercise__des">
+            <p><span class="des__detail">장시간 편향적인 자세로 앉아있으면서 틀어진 골반을 바로잡는 스트레칭</span><br><br>
+              스트레칭 부위: <span class="des__em">골반</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 프로필 클릭 설정 -->
+    <script>
+      const profile = document.querySelector('#profile');
+      const tooltip = document.querySelector('.tooltip');
+      profile.addEventListener("click", () => {
+        tooltip.classList.toggle('active');
+      });
+    </script>
+    </div>
+
+
+    <!--footer-->
+    <footer>
+      <p id="footer_email"><i class="fab fa-github"></i> github : <a href="https://github.com/jiaeYoon/TurtleNeck" id="link">github/TurtleNeck</a></p> 
+      <p id="footer_content"><i class="far fa-copyright"></i> copyright 복3심1 </p>
+    </footer>
+  </body>
+</html>
+    

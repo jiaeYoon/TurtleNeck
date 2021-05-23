@@ -1,0 +1,76 @@
+:root {
+  /* 배경색 */
+  --background-color: #fcf2e8;
+  --main-color: #4A8BCC;
+}
+
+@font-face {
+  font-family: 'MapoPeacefull';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--background-color);
+  width: 100%;
+  height: 150%;
+  font-family: 'MapoPeacefull';
+}
+
+/* Profile */
+.profile {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  top: 10%;
+  padding: 10px;
+  text-align: center;
+  /*display: inline-block;*/
+  width: 200px;
+}
+
+.character img {
+  width: 80%; 
+  object-fit: contain;
+}
+
+.user_name {
+  font-size: 1.2rem;
+  margin: 5px;
+}
+
+.ex {
+  margin: 5px;
+}
+
+#ex_time {
+  color: var(--main-color);
+}
+
+.setting {
+  width: 100%;
+  text-align: right;
+  margin: 5px;
+}
+
+.setting i {
+  color: gray;
+  cursor: pointer;
+}
+
+/* Slogan */
+.slogan {
+  background-color: white;
+  width: 200px;
+  padding: 10px;
+  margin-top: 25px;
+}
+
+.highlight {
+  background-color: var(--main-color);
+  color: white;
+}

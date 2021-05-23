@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자가진단</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <link rel="stylesheet" href="SelfCheck.css">
+  <script src="SelfCheck.js" defer></script>
+  </head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
+      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+    <!-- 로그아웃 -->
+    <i class="fas fa-user-circle" id="profile"></i>
+    <!-- 말풍선 -->
+    <div class="tooltip">
+      <!-- 나중에 회원정보 추가하기 -->
+      <a href="../challenge/challenge.php">마이 페이지</a>
+      <hr/>
+      <a href="../signin/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- 본문 -->
+  <main class="main">
+    <img class="beach" src="../img/beach.svg" alt="main page">
+    <img class="turtle" src="../img/turtle.svg" alt="turtle">
+    
+    <div class="container">
+      <h1>자가진단</h1>
+      <h4>현재 상태를 체크해보세요.</h4>
+      <!--Check List-->
+      <form action="SelfCheck.php" method="GET">
+        <label><input type="checkbox" name="check1">어깨와 목 주위가 자주 뻐근하다.</label><br/>
+        <label><input type="checkbox" name="check2">옆에서 보면 고개가 어깨보다 앞으로 빠져나와 있다.</label><br/>
+        <label><input type="checkbox" name="check3">등이 굽어 있다.</label><br/>
+        <label><input type="checkbox" name="check4">쉽게 피로하고 두통이 있으며 어지럼증을 느낀다.</label><br/>
+        <label><input type="checkbox" name="check5">잠을 자도 피곤하고 목덜미가 불편하다.</label><br/>
+        <button id="result" type="submit">결과 확인하기</button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

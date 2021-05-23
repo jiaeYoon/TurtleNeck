@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>배너</title>
+	<link rel="stylesheet" href="cafebene.css">
+</head>
+<body>
+
+<div class="section">
+	<input type="radio" name="slide" id="slide01" checked>
+	<input type="radio" name="slide" id="slide02">
+	<input type="radio" name="slide" id="slide03">
+	<div class="slidewrap">
+		
+		<ul class="slidelist">
+			<!-- 슬라이드 영역 -->
+			<li class="slideitem">
+				<a>
+					<div class="textbox">
+						<h3>가까운 병원</h3>
+						<p>내 위치와 가까운 병원을 안내해 드려요</p>
+					</div>
+					<img src="http://mm.sookmyung.ac.kr/~sblim/lec/web-int/data/lucky1.jpg">
+				</a>
+			</li>
+			<li class="slideitem">
+				<a href="../selfcheck/SelfCheck.html">
+					
+					<div class="textbox">
+						<h3>자가진단</h3>
+						<p>나는 지금 거북이일까?</p>
+					</div>
+					<img src="http://mm.sookmyung.ac.kr/~sblim/lec/web-int/data/lucky2.jpg" >
+				</a>
+			</li>
+			<li class="slideitem">
+				<a>
+					
+					<div class="textbox">
+						<h3>유용한 정보</h3>
+						<p>거북목 관련 블로그 이동</p>
+					</div>
+					<img src="http://mm.sookmyung.ac.kr/~sblim/lec/web-int/data/lucky3.jpg">
+				</a>
+			</li class="slideitem">
+			<div class="slide-control">
+				<div>
+					<label for="slide03" class="left"></label>
+					<label for="slide02" class="right"></label>
+				</div>
+				<div>
+					<label for="slide01" class="left"></label>
+					<label for="slide03" class="right"></label>
+				</div>
+				<div>
+					<label for="slide02" class="left"></label>
+					<label for="slide01" class="right"></label>
+				</div>
+			</div>
+
+		</ul>
+		<!-- 페이징 -->
+		<ul class="slide-pagelist">
+			<li><label for="slide01"></label></li>
+			<li><label for="slide02"></label></li>
+			<li><label for="slide03"></label></li>
+		</ul>
+	</div>
+
+	
+</div>
+
+
+</body>
+</html>
