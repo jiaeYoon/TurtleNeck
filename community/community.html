@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../challenge/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+    integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script type="javascript">
+      function warnEmpty() {
+        alert("Enter a Input!")
+      }
+    </script>
+    <title>커뮤니티</title>
+
+  </head>
+  <body>
+    <header>
+      <img id="wave" src="../img/sea.svg" alt="wave"> 
+      <nav class="navbar">
+        <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <ul class="navbar__menu">
+        <li><a href="">30일 챌린지</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href="">마이페이지</a></li>
+        <li><a href="">정보 수정</a></li>
+        </ul>
+        <i class="fas fa-user-circle" id="profile"></i>
+      </nav>
+      <!-- tooltip -->
+      <div class="tooltip">
+        <a href="../main/main.html">마이 페이지</a>
+        <a href="../main/main.html">정보 수정</a>
+        <hr/>
+        <a href="../signup/logoutProcess.php">로그아웃</a>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <li>병원</li>
+        <li>제품</li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <div id="comments">
+        <div id="comments-head" class="comment-row">
+          <span id="comments-count">2</span> Comment(s)
+        </div>
+        <div class="comment-row">
+          <textarea id="new-comment" name="new_comment" row=5 placeholder="리뷰를 작성해보세요."></textarea>
+          <button type="submit" onclick="submitComment()">작성</button>
+      </div>
+      <div class="comment-row">
+        <div class="comment-date">00/00/00 00:00</div>
+        <div class="comment-content">Sample-comment</div>
+      </div>
+    </div>
+  </body>
+</html>
