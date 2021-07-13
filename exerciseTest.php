@@ -85,21 +85,24 @@
       <div class="tutorial">
         <div class="tutorial__title">동작 설명</div>
 
-        <!-- image -->
-        <div class="tutorial__image">
-          <img src="" alt="exercise1">
-        </div>
-        
         <!-- exercise information -->
-        <div class="tutorial__expl">
-          상체를 꼿꼿이 세우고 오른손으로 머리를 잡고, 목 옆쪽이 늘어나도록 당겨주세요.
-        </div>
-
-        <!-- timer -->
-        <div class="tutorial__timer">
-          <i class="fas fa-stopwatch"></i>
-          <div><span id="ex_sec">10</span>s</div>
-        </div>
+        <table>
+          <tr>
+            <td rowspan="2">
+              <!-- image -->
+              <div class="tutorial__image">
+                <img src="" id="tt_img" alt="exercise">
+              </div>
+            </td>
+            <td id="tt_expl"></td>
+          </tr>
+          <tr>
+            <td class="tutorial__timer">
+              <i class="fas fa-stopwatch"></i>
+              <span id="tt_sec"></span>s
+            </td>
+          </tr>
+        </table>
 
         <!-- start -->
         <div class="tutorial__start">시작하기</div>
@@ -118,10 +121,10 @@
       <!-- WebCam -->
       <div id="container">
         <video autoplay="true" id="video"></video>
-      </div>
 
-      <!-- image -->
-      <img id="ex_img" src="" alt="exercise1">
+        <!-- image -->
+        <img id="ex_img" src="" alt="exercise">
+      </div>
       
       <!-- bar -->
       <div id="out_bar">
@@ -143,6 +146,13 @@
   <script>
     'use strict';
 
+    // tooltip
+    const profile = document.querySelector('#profile');
+    const tooltip = document.querySelector('.tooltip');
+    profile.addEventListener("click", () => {
+      tooltip.classList.toggle('active');
+    });
+
     /* 웹캠 출력 */
     var video = document.querySelector("#video");
 
@@ -154,11 +164,13 @@
         .catch(function (error) {
           console.log("Error");
         });
-
+    }
+    
     /* Tutorial */
     const tutorial = document.querySelector('.tutorial');
     const start = document.querySelector('.tutorial__start');
     
+    // 시작하기 버튼 누르면 화면 사라짐
     start.addEventListener("click", () => {
       tutorial.style.display = 'none';
     });
@@ -170,17 +182,11 @@
     const ex_stepTimes = <?php echo json_encode($s_times)?>;
     const ex_stepExpls = <?php echo json_encode($s_expls)?>;
 
-    // tooltip
-    const profile = document.querySelector('#profile');
-    const tooltip = document.querySelector('.tooltip');
-    profile.addEventListener("click", () => {
-      tooltip.classList.toggle('active');
-    });
-
     /* exercise & overview */
     // variables
     // timer & bar
     const timer = document.querySelector('#ex_sec');
+    const tt_sec = document.querySelector('#tt_sec');
     const bar = document.querySelector('#in_bar');
 
     // exercise steps
@@ -191,15 +197,24 @@
     let sec = 0;
     let ex_time = ex_stepTimes[0];
     timer.textContent = ex_time;
+    tt_sec.textContent = ex_time;
     let play = true;
 
     // exercise image
     const ex_image = document.querySelector('#ex_img');
     ex_image.setAttribute('src', `ex_image/${exercise_name}${ex_stepNums[0]}.png`);
+    const tt_image = document.querySelector('#tt_img');
+    tt_image.setAttribute('src', `ex_image/${exercise_name}${ex_stepNums[0]}.png`);
     let next_img;
     let index = 0;
     let done = 0;   // 동작 수행 여부 저장
     
+    // exercise text
+    const ex_name = document.querySelector('.tutorial__title');
+    const tt_expl = document.querySelector('#tt_expl');
+    ex_name.textContent = ex_stepNames[0];
+    tt_expl.innerHTML = ex_stepExpls[0];
+
     // overview에 노드 추가
     const overview = document.querySelector('.overview');
     for (let i = 0; i < stepCount; i++) {
@@ -214,12 +229,12 @@
     // overview 자식 노드 list
     const imgList = overview.children;
     
-    // functions
-    // timer 실행
-    window.onload = () => {
+    /* functions */
+    // 시작하기 버튼 누르면 timer 실행
+    start.addEventListener("click", () => {
       clearInterval(time);
       time = setInterval("Timer();", 1000);
-    }
+    });
 
     function sleep(ms) {
       const wakeUpTime = Date.now() + ms;
@@ -256,6 +271,9 @@
         if (index < stepCount - 1) {
           next_img = `ex_image/${exercise_name}${ex_stepNums[index + 1]}.png`;
           ex_image.setAttribute('src', next_img);
+          tt_image.setAttribute('src', next_img);
+          tutorial.style.visibility = 'visible'; // 동작 설명 띄우기
+          clearInterval(time); // 시작하기 버튼 누를 때까지 멈춤
         }
         
         // 초기화
@@ -274,7 +292,9 @@
         index++;
 
         // 텍스트 바꾸기
+        ex_name.textContent = ex_stepNames[index];
         ex_time = ex_stepTimes[index];
+        tt_expl.innerHTML = ex_stepExpls[index];
       }
       
       // 운동 종료 시
@@ -316,10 +336,15 @@
       if (index > 0) {
         const p_img = `ex_image/${exercise_name}${ex_stepNums[--index]}.png`;
         ex_image.setAttribute('src', p_img);
+        tt_image.setAttribute('src', p_img);
         ex_time = ex_stepTimes[index];
         timer.textContent = ex_time;
         sec = 0;
         bar.style.width = '0%';
+        ex_name.textContent = ex_stepNames[index];
+        tt_expl.innerHTML = ex_stepExpls[index];
+        tutorial.style.visibility = 'visible';
+        clearInterval(time);
       }
     };
 
@@ -327,10 +352,15 @@
       if (index < stepCount - 1) {
         const n_img = `ex_image/${exercise_name}${ex_stepNums[++index]}.png`;
         ex_image.setAttribute('src', n_img);
+        tt_image.setAttribute('src', n_img);
         ex_time = ex_stepTimes[index];
         timer.textContent = ex_time;
         sec = 0;
         bar.style.width = '0%';
+        ex_name.textContent = ex_stepNames[index];
+        tt_expl.innerHTML = ex_stepExpls[index];
+        tutorial.style.visibility = 'visible';
+        clearInterval(time);
       }
     };
   </script>
