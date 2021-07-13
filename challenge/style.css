@@ -5,6 +5,7 @@
   --tooltip-color: #336699;
   --tt-text-color: #f0f0f0;
   --circle-color: #DDDDDD;
+  --bar-color: #F47575;
 }
 
 @font-face {
@@ -239,8 +240,12 @@ header i {
   box-shadow: 4px 4px 10px 4px rgba(0, 0, 0, 0.25);
 }
 
+.graph__bar {
+  display: none;
+}
+
 .graph__pie {
-  background: conic-gradient(var(--line-color) 120deg, var(--circle-color) 120deg);
+  /*background: conic-gradient(var(--line-color) 0deg 120deg, var(--circle-color) 120deg);*/
   width: 310px;
   height: 310px;
   border-radius: 50%;
@@ -249,7 +254,7 @@ header i {
   justify-content: center;
 }
 
-.graph__background {
+.pie__background {
   width: 230px;
   height: 230px;
   background-color: var(--background-color);
@@ -336,15 +341,28 @@ header i {
     border-radius: 20px;
   }
 
-  .graph__pie {
-    width: 50%;
+  .graph__pie,
+  .pie__background {
+    display: none;
+  }
+
+  .graph__bar {
+    display: flex;
     height: 20px;
-    border-radius: 20px;
+  }
+
+  .bar__basic {
+    width: 0%;
+    height: 20px;
+    border-radius: 20px 0px 0px 20px;
     background: var(--line-color);
   }
 
-  .graph__background {
-    display: none;
+  .bar__extra {
+    width: 0%;
+    height: 20px;
+    border-radius: 0px;
+    background: var(--bar-color);
   }
 
   .graph__start2 {
