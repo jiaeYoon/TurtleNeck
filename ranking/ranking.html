@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ranking.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../challenge/style.css">
+    <script src="ranking.js" defer></script>
+    <title>Ranking</title>
+  </head>
+  <body>
+
+    <!-- header -->
+    <header>
+      <img id="wave" src="../img/sea.svg" alt="wave"> 
+      <nav class="navbar">
+        <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <ul class="navbar__menu">
+        <li><a href="">30일 챌린지</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href="">마이페이지</a></li>
+        <li><a href="">정보 수정</a></li>
+        </ul>
+        <i class="fas fa-user-circle" id="profile"></i>
+      </nav>
+
+      <!-- tooltip -->
+      <div class="tooltip">
+        <a href="../main/main.html">마이 페이지</a>
+        <a href="../main/main.html">정보 수정</a>
+        <hr/>
+        <a href="../signup/logoutProcess.php">로그아웃</a>
+      </div>
+    </header>
+
+    <!-- title -->
+    <div class="title">
+      <div class="title__line"></div>
+      <div class="title__text">Ranking</div>
+    </div>
+    <!-- 상위권 3위-->
+      <div id="toprank">
+        <!-- <table id="toptable">
+        </table> -->
+        <div id="top2" class="rectangles">이름<br>
+          <img class="profiles" src="../img/profile/1.png"><div class="inside">2등</div>
+        </div>
+        <div id="top1" class="rectangles">이름<br>
+          <img class="profiles" src="../img/profile/1.png"><div class="inside" id="first">1등
+            <img id="image" src="https://image.flaticon.com/icons/png/512/3132/3132778.png" width="50"></div>
+        </div>
+        <div id="top3" class="rectangles">이름<br>
+          <img class="profiles" src="../img/profile/1.png"><div class="inside">3등</div>
+        </div>
+      </div>
+
+    <!-- 상위권 10위-->
+    <div id="allrank">
+      <br>
+      <table id="etctable">
+        <tr>
+          <th><span class="bold">순위</span></th>
+          <th><span class="bold">이름</span></th>
+          <th><span class="bold">점수</span></th>
+        </tr>
+        <tr>
+          <td>4등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>5등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>6등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>7등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>8등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>9등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td>10등</td>
+          <td>name</td>
+          <td>score</td>
+        </tr>
+        <tr>
+          <td colspan='3'>.<br>.<br>.</td>
+        </tr>
+        <tr style="border:none;" id="me">
+          <td style="border-left:none;">nnn등</td>
+          <td style="border-left:none;">Myname</td>
+          <td style="border:none;">score</td>
+        </tr>
+        <tr>
+          <td colspan='3'>&nbsp</td>
+        </tr>
+      </table>
+      <!-- <div id="etcrank">
+
+        <span>순위</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>4</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>5</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>6</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>7</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>8</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>9</span> <span> 이름  </span><span> 횟수</span><br>
+        <span>10</span> <span> 이름  </span><span> 횟수</span>
+      </div> -->
+    </div>
+  </body>
+</html>
