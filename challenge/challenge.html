@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+  integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <script src="challenge.js" defer></script>
+  <title>TurtleNeck</title>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+    <nav class="navbar">
+      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <ul class="navbar__menu">
+        <li><a href="">30일 챌린지</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href="">마이페이지</a></li>
+        <li><a href="">정보 수정</a></li>
+      </ul>
+      <div class="navbar__btn">
+        <i class="fas fa-user-circle" id="profile"></i>
+        <!-- toggle menu -->
+        <i class="fas fa-bars" id="toggleBtn"></i>
+      </div>
+    </nav>
+    <!-- tooltip -->
+    <div class="tooltip">
+      <a href="../main/main.html">마이 페이지</a>
+      <a href="../main/main.html">정보 수정</a>
+      <hr/>
+      <a href="../signup/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- hideen background -->
+  <div class="hidden__bg"></div>
+
+  <!-- title -->
+  <div class="title">
+    <div class="title__line"></div>
+    <div class="title__text">30일 챌린지</div>
+  </div>
+
+  <!-- challenge -->
+  <div class="challenge">
+    <!-- calendar -->
+    <div class="calendar">
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">1</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">2</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">3</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">4</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">5</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">6</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">7</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">8</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">9</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">10</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">11</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">12</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">13</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">14</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">15</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">16</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">17</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">18</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">19</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">20</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">21</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">22</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">23</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">24</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">25</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">26</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">27</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">28</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">29</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">30</div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- graph -->
+    <div class="graph">
+      <div class="graph__text">
+        <div class="graph__text1">보상 획득까지</div>
+        <div class="graph__text1">
+          <span class="graph__dday">21</span>일 남았습니다.
+        </div>
+      </div>
+      <div class="graph__frame">
+        <div class="graph__pie">
+          <div class="graph__background">
+            <div class="graph__start">
+              <div class="graph__sday">2021/07/11</div>
+              <div class="graph__text1">부터 시작</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="graph__start2">
+        <div class="graph__sday">2021/07/11</div>
+        <div class="graph__text1">부터 시작</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
