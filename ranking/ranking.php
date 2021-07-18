@@ -1,3 +1,46 @@
+<?php
+  $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
+  /* 인코딩 설정 */
+  mysqli_query("SET session character_set_connection=utf8;");
+  mysqli_query("SET session character_set_results=utf8;");
+  mysqli_query("SET session character_set_client=utf8;");
+
+  /*세션에 있는 id값 가져오기 */
+  session_start();
+  $id = $_SESSION;
+  $id = implode("", $id);
+
+  /* 순위권(월별) 정보 배열에 저장하기  */
+  $rank_name = array();
+  $rank_count = array();
+  $i = 0;
+
+  $sql = "SELECT challenge.id, u_name, COUNT(if(MONTH(challenge.c_date) = MONTH(now()), challenge.id, null)) AS cc  FROM challenge,user_info WHERE challenge.id = user_info.id GROUP BY challenge.id ORDER BY cc DESC;";
+  $result = mysqli_query($conn, $sql);
+  while($row = mysqli_fetch_row($result))
+  {
+    $row = mysqli_fetch_row($result);
+
+    while($i < 10)
+    {
+      $rank_name[$i] = $row[1];
+      $rank_count[$i] = $row[2];
+    }
+    if ($row[0] == $id)
+    {
+      $myrank = $i;
+      $mycount = $row[2];
+    }
+    $i++;
+  }
+
+  /*사용자 이름과 사용자 랭킹 */
+  $sql = "SELECT u_name FROM user_info WHERE id='{$id}'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_row($result);
+  $myname = $row[0];
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -40,18 +83,16 @@
       <div class="title__line"></div>
       <div class="title__text">Ranking</div>
     </div>
+
     <!-- 상위권 3위-->
       <div id="toprank">
-        <!-- <table id="toptable">
-        </table> -->
-        <div id="top2" class="rectangles">점수 <br>이름<br>
-          <img class="profiles" src="../img/profile/1.png"><div class="inside" id="second">2등</div>
+        <div id="top2" class="rectangles"><?=$rank_name[1]?><br>
+          <img class="profiles" src="../img/profile/1.png"><div class="inside">2등</div>
         </div>
-        <div id="top1" class="rectangles">점수 <br>이름<br>
-          <img class="profiles" src="../img/profile/1.png"><div class="inside" id="first">1등
-            <img id="image" src="https://image.flaticon.com/icons/png/512/3132/3132778.png" width="50"></div>
+        <div id="top1" class="rectangles"><?=$rank_name[0]?><br>
+          <img class="profiles" src="../img/profile/1.png"><div class="inside" id="first">1등</div>
         </div>
-        <div id="top3" class="rectangles">점수 <br>이름<br>
+        <div id="top3" class="rectangles"><?=$rank_name[2]?><br>
           <img class="profiles" src="../img/profile/1.png"><div class="inside">3등</div>
         </div>
       </div>
@@ -67,62 +108,51 @@
         </tr>
         <tr>
           <td>4등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[3]?></td>
+          <td><?=$rank_count[3]?></td>
         </tr>
         <tr>
           <td>5등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[4]?></td>
+          <td><?=$rank_count[4]?></td>
         </tr>
         <tr>
           <td>6등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[5]?></td>
+          <td><?=$rank_count[5]?></td>
         </tr>
         <tr>
           <td>7등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[6]?></td>
+          <td><?=$rank_count[6]?></td>
         </tr>
         <tr>
           <td>8등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[7]?></td>
+          <td><?=$rank_count[7]?></td>
         </tr>
         <tr>
           <td>9등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[8]?></td>
+          <td><?=$rank_count[8]?></td>
         </tr>
         <tr>
           <td>10등</td>
-          <td>name</td>
-          <td>score</td>
+          <td><?=$rank_name[9]?></td>
+          <td><?=$rank_count[9]?></td>
         </tr>
         <tr>
           <td colspan='3'>.<br>.<br>.</td>
         </tr>
         <tr style="border:none;" id="me">
-          <td style="border-left:none;">nnn등</td>
-          <td style="border-left:none;">Myname</td>
-          <td style="border:none;">score</td>
+          <td style="border-left:none;"><?=$myrank?>등</td>
+          <td style="border-left:none;"><?=$myname?></td>
+          <td style="border:none;"><?=$mycount?></td>
         </tr>
         <tr>
           <td colspan='3'>&nbsp</td>
         </tr>
       </table>
-      <!-- <div id="etcrank">
-
-        <span>순위</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>4</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>5</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>6</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>7</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>8</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>9</span> <span> 이름  </span><span> 횟수</span><br>
-        <span>10</span> <span> 이름  </span><span> 횟수</span>
-      </div> -->
     </div>
   </body>
 </html>

@@ -54,6 +54,9 @@ table th {
 	top: 100px;
 }
 
+#top2 {
+	
+}
 #allrank {
 	display: flex;
 	justify-content: center;
@@ -105,6 +108,9 @@ table th {
 
 #first {
 	height: 200px;
+}
+#second {
+	height : 140px;
 }
 .inside {
 	background-color: powderblue;
