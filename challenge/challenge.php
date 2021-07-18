@@ -1,179 +1,382 @@
 <?php
-    session_start();
-    $id = $_SESSION;
-    $id = implode("", $id);
+  session_start();
+  $id = $_SESSION;
+  $id = implode("", $id);
 
-    $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
-    $sql = "SELECT * FROM challenge WHERE id='{$id}' ORDER BY c_date";
-    $result = mysqli_query($conn, $sql);
-    
-    $dates = array();
-    $i = 0;
-    while($row=mysqli_fetch_row($result)) {
-        $date = $row[1];
-        $date = substr($date, 8, 2); 
-        $dates[$i] = $date;
-        $i++;
+  $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
+  // user_info에 저장된 시작 날짜 가져오기
+  $sql = "SELECT startDate FROM user_info WHERE id = ${id}";
+  $result = mysqli_query($conn, $sql);
+
+  $s_row = mysqli_fetch_row($result);
+  // 시작 날짜
+  $start_date = $s_row[0];
+  
+  // 날짜 구하기
+  $sql2 = "SELECT c_date FROM challenge WHERE id = ${id} and c_date >= DATE_FORMAT(now(), '${start_date}')";
+  $result2 = mysqli_query($conn, $sql2);
+      
+  $i = 0;
+  $dates = array();
+  
+  while($row = mysqli_fetch_row($result2)){
+    if ($row) {
+      $date = $row[0];
+      $dates[$i] = $date;
+      $i++;
     }
+  }
+
+  // 누적 날짜
+  $cumulative_days = sizeof($dates);
+  // 마지막으로 한 날짜
+  $last_date = $start_date;
+  if ($cumulative_days != 0) $last_date = end($dates);
+
+  // 시작 날짜 이후 누적 날짜가 0이면 초기화 후 처음 운동하는 시점에 시작 날짜 변경
+  if ($cumulative_days == 1) {
+    $sql3 = "UPDATE user_info SET startDate = '${last_date}' WHERE id = ${id}";
+    $result3 = mysqli_query($conn, $sql3);
+  }
 ?>
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="challenge.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <title></title>
-  </head>
-  <body>
-      <!-- month -->
-  <div class="month">
-    <div class="m_num"></div>
-    <div class="m_eng"></div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+  integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <title>TurtleNeck</title>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+    <nav class="navbar">
+      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <ul class="navbar__menu">
+        <li><a href="">30일 챌린지</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href="">마이페이지</a></li>
+        <li><a href="">랭킹</a></li>
+      </ul>
+      <div class="navbar__btn">
+        <i class="fas fa-user-circle" id="profile"></i>
+        <!-- toggle menu -->
+        <i class="fas fa-bars" id="toggleBtn"></i>
+      </div>
+    </nav>
+    <!-- tooltip -->
+    <div class="tooltip">
+      <a href="../main/main.html">마이 페이지</a>
+      <a href="../main/main.html">정보 수정</a>
+      <hr/>
+      <a href="../signup/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- hideen background -->
+  <div class="hidden__bg"></div>
+
+  <!-- title -->
+  <div class="title">
+    <div class="title__line"></div>
+    <div class="title__text">30일 챌린지</div>
   </div>
 
-  <!-- calendar -->
+  <!-- challenge -->
   <div class="challenge">
-    <table class="calendar">
-      <thead>
-        <tr>
-          <th>SUN</th>
-          <th>MON</th>
-          <th>TUE</th>
-          <th>WED</th>
-          <th>THU</th>
-          <th>FRI</th>
-          <th>SAT</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <!-- calendar -->
+    <div class="calendar">
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">1</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">2</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">3</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">4</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">5</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">6</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">7</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">8</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">9</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">10</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">11</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">12</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">13</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">14</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">15</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">16</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">17</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">18</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">19</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">20</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">21</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">22</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">23</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">24</div>
+        </div>
+      </div>
+      <div class="calendar__part">
+        <div class="calendar__circle">
+          <div class="calendar__num">25</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">26</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">27</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">28</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">29</div>
+        </div>
+        <div class="calendar__circle">
+          <div class="calendar__num">30</div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- graph -->
+    <div class="graph">
+      <div class="graph__text">
+        <div class="graph__text1 dday__text">보상 획득까지</div>
+        <div class="graph__text1 dday__text2">
+          <span class="graph__dday">21</span>일 남았습니다.
+        </div>
+      </div>
+      <div class="graph__frame">
+        <div class="graph__bar">
+          <div class="bar__basic"></div>
+          <div class="bar__extra"></div>
+        </div>
+        <div class="graph__pie">
+          <div class="pie__background">
+            <div class="graph__start">
+              <div class="graph__sday"></div>
+              <div class="graph__text1">부터 시작</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="graph__start2">
+        <div class="graph__sday"></div>
+        <div class="graph__text1">부터 시작</div>
+      </div>
+    </div>
   </div>
   <script>
-  /* date */
-  const today = new Date();
+    'use strict';
 
-  // month
-  const month = today.getMonth() + 1;
+    /* header buttons(profile, menu bar) */
+    const toggleBtn = document.querySelector('#toggleBtn');
+    const profileBtn = document.querySelector('#profile');
 
-  const month_num = document.querySelector('.m_num');
-  month_num.textContent = month;
+    const menu = document.querySelector('.navbar__menu');
+    const hidden_box = document.querySelector('.hidden__bg');
+    const tooltip = document.querySelector('.tooltip');
 
-  const month_eng = document.querySelector('.m_eng');
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      hidden_box.classList.toggle('active');
+    });
 
-  switch (month) {
-    case 1:
-      month_eng.textContent = 'JAN';
-      break;
-    case 2:
-      month_eng.textContent = 'FEB';
-      break;
-    case 3:
-      month_eng.textContent = 'MAR';
-      break;
-    case 4:
-      month_eng.textContent = 'APR';
-      break;
-    case 5:
-      month_eng.textContent = 'MAY';
-      break;
-    case 6:
-      month_eng.textContent = 'JUN';
-      break;
-    case 7:
-      month_eng.textContent = 'JUL';
-      break;
-    case 8:
-      month_eng.textContent = 'AUG';
-      break;
-    case 9:
-      month_eng.textContent = 'SEP';
-      break;
-    case 10:
-      month_eng.textContent = 'OCT';
-      break;
-    case 11:
-      month_eng.textContent = 'NOV';
-      break;
-    case 12:
-      month_eng.textContent = 'DEC';
-      break;
-  }
-
-  // date & day
-  const f_date = new Date(today.getFullYear(), today.getMonth(), 1).getDate();  // 첫째 날
-  const l_date = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();  // 마지막 날
-  const f_day = new Date(today.getFullYear(), today.getMonth(), 1).getDay();  // 첫째 날의 요일
+    profileBtn.addEventListener('click', () => {
+      tooltip.classList.toggle('active');
+    });
 
 
-  /* day setting */
-  // 행 추가
-  function insertRow() {
-    calendar.innerHTML += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-  };
+    /* 시작 날짜 */
+    const start_date = <?php echo json_encode($start_date)?>;    // 시작 날짜
 
-  // 1일 전까지 공란 만들기
-  const calendar = document.querySelector('.calendar > tbody');
+    // 시작 날짜 표시(html)
+    const start_from1 = document.querySelector('.graph__start .graph__sday');
+    const start_from2 = document.querySelector('.graph__start2 .graph__sday');
 
-  // 달력 형태 만들기
-  const days = Math.ceil((f_day + l_date) / 7);
-  for (let i = 0; i < days; i++)
-    insertRow();
+    start_from1.textContent = start_date;
+    start_from2.textContent = start_date;
 
-  let week = new Array(days);
-  for (let i = 0; i < days; i++) {
-    week[i] = calendar.childNodes[i + 1];
-  }
 
-  for (let i = 0; i < f_day; i++){
-    week[0].childNodes[i].textContent = "";
-  }
+    /* 보상 획득까지 남은 날짜 */
+    let dday_date = 21;       // 21일 채우면 성공
+    const cumulative_days = <?php echo json_encode($cumulative_days)?>;  // 누적 날짜
 
-  // 오늘 날짜 색 바꾸기
-  const todayDate = (index, day, i) => {
-    const todayCell = week[index].childNodes[day];
-    if (i == today.getDate()) {
-      todayCell.style.backgroundColor = "#F2BE8A";
+    // 보상 획득까지 남은 날짜 표시(html)
+    const days_left = document.querySelector('.graph__dday');
+    const dday_text = document.querySelector('.graph__text1.dday__text');
+    const graph_text = document.querySelector('.graph__text1.dday__text2');
+
+    if (cumulative_days < 21) {          // 기본 보상
+      dday_date -= cumulative_days;
     }
-  }
-
-  // DB에서 date 값 받아오기
-  const dates = <?php echo json_encode($dates)?>;
-
-  /* stamp */
-  const makeNode = (dates, i) => {
-    const stampNode = document.createElement('div');
-    const stampImg = document.createElement('i');
-    stampImg.setAttribute('class', 'far fa-grin');
-    stampImg.style.color = '#19bc9c';
-    if (i < 10) i = `0${i}`;
-    if (dates.indexOf(`${i}`) != -1) stampImg.style.visibility = 'visible';
-    else stampImg.style.visibility = 'hidden';
-    
-    stampNode.appendChild(stampImg);
-    stampNode.setAttribute('class', 'day');
-
-    return stampNode;
-  }
-
-
-  // 날짜 채우기
-  let c_day = f_day;  // 요일 값 -> 초기 값 : 첫째 날 요일
-  let index = 0;
-
-  for (let i = 1; i <= l_date; i++) {
-    if (c_day >= 7) { 
-      index++; 
-      c_day %= 7;
+    else if (cumulative_days === 21) {   // 기본 보상 획득
+      dday_text.textContent = '기본 보상 획득! 추가 보상 획득까지 도전하세요!'
+      graph_text.style.display = 'none';
     }
-    week[index].childNodes[c_day].textContent = i;
-    week[index].childNodes[c_day].insertBefore(makeNode(dates, i), null);
-    
-    todayDate(index, c_day, i);
+    else if (cumulative_days === 30) {   // 추가 보상 획득
+      dday_text.textContent = '추가 보상 획득! 30일 챌린지 완주를 축하합니다!'
+      graph_text.style.display = 'none';
+    }
+    else {                               // 추가 보상
+      dday_text.textContent = '추가 보상 획득까지';
+      dday_date = 30 - cumulative_days;
+    }
 
-    c_day++;
-  }
-</script>
+    days_left.textContent = dday_date;
+
+
+    /* 그래프 그리기 */
+    // 그래프 관련 html 요소
+    const graph_frame = document.querySelector('.graph__frame');
+    const pie_gauge = document.querySelector('.graph__pie');        // pie graph
+    const bar_basic_gauge = document.querySelector('.bar__basic');  // bar graph
+    const bar_extra_gauge = document.querySelector('.bar__extra');
+
+    // 그래프 gauge 계산
+    const gauge_degree = 12 * cumulative_days;
+    const gauge_percentage = (cumulative_days <= 21) ?
+    (70 / 21) * cumulative_days : (30 / 9) * (9 - (30 - cumulative_days));
+
+    // 그래프 그리기
+    if (cumulative_days <= 21) {         // 기본 보상
+      pie_gauge.style.background = `conic-gradient(#4a8bcc 0deg ${gauge_degree}deg, #dddddd ${gauge_degree}deg)`;
+      bar_basic_gauge.style.width = `${gauge_percentage}%`;
+    }
+    else {                              // 추가 보상
+      pie_gauge.style.background = `conic-gradient(#4A8BCC 0deg 252deg, #F47575 252deg ${gauge_degree}deg, #DDDDDD ${gauge_degree}deg)`;
+      bar_basic_gauge.style.width = "70%";
+      bar_extra_gauge.style.width = `${gauge_percentage}%`;
+      
+      if (cumulative_days === 30) {   // 추가 보상 획득
+        bar_extra_gauge.style.borderRadius = "0px 20px 20px 0px";
+      }
+    }
+
+
+    /* 도장 찍기 */
+    const calendar = document.querySelector('.calendar');
+
+    // 스탬프 몇 줄 찍어야 될 지 저장
+    const rows = Math.ceil(cumulative_days / 6);
+    let stamp_row = 0;
+
+    // 도장 찍기
+    for (let i = 0; i < calendar.childNodes.length; i++) {
+      const calendar_row = calendar.childNodes[i];  // text, .calendar__part(줄 단위)로 구성
+
+      // nodeType이 element(1)인 경우 도장 찍기
+      if (calendar_row.nodeType === 1 && stamp_row < rows) {
+        const calendar_days = calendar_row.childNodes;  // text, .calendar__circle(날짜)로 구성
+        let stamp_day = 0;
+        
+        // 마지막 줄에서 줄 전체를 채우지 않는 경우
+        if (stamp_row === rows - 1 && (cumulative_days % 6) !== 0 ) {
+          for (let j = 0; j < calendar_days.length; j++) {
+            const calendar_day = calendar_days[j];
+            if (calendar_day.nodeType === 1 && stamp_day < cumulative_days % 6) {
+              calendar_day.style.backgroundColor = "rgba(74, 139, 204, 0.5)";
+              stamp_day++;
+            }
+          }
+        }
+
+        // 그 외
+        else {
+          for (let j = 0; j < calendar_days.length; j++) {
+            const calendar_day = calendar_days[j];
+            if (calendar_day.nodeType === 1 && stamp_day < 6) {
+              calendar_day.style.backgroundColor = "rgba(74, 139, 204, 0.5)";
+              stamp_day++;
+            }
+          }
+        }
+        stamp_row++;
+      }
+    }
+
+
+    /* 초기화 */
+    // 공백 기간 구하기
+    const date = new Date();                  // 현재 날짜
+    const last_date = new Date(<?php echo json_encode($last_date)?>); // 마지막으로 한 날짜
+
+    // 공백 기간
+    const blank_term = Math.floor((date.getTime() - last_date.getTime()) / (1000 * 60 * 60 * 24));
+
+    // 누적 날짜가 0이상이고, blank_term이 5이상이면 초기화(공백 기간이 5일이면 초기화)
+    if (blank_term > 5 && cumulative_days > 0) {
+      reset_calendar();
+    }
+
+    // 시작 날짜로부터 30일이 지났으면 초기화
+    const first_date = new Date(`${start_date}`);         // 시작 날짜
+    const success_term = Math.floor((date.getTime() - first_date.getTime()) / (1000 * 60 * 60 * 24));
+
+    // 현재 날짜 - 시작 날짜가 30이면 초기화
+    if (success_term == 30) {
+      reset_calendar();
+    }
+
+    function reset_calendar() {
+      // 시작 날짜를 현재 날짜로 저장하는 php로 이동
+      location.href = "init.php";
+    }
+  </script>
 </body>
 </html>
