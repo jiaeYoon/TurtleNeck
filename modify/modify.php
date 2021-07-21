@@ -11,10 +11,18 @@
   $id = $_SESSION;
   $id = implode("", $id);
 
+  /* url을 통한 페이지 접근 차단 */
+  $prevPage = $_SERVER["HTTP_REFERER"];
+  if(substr($prevPage, -15, ) != "authProcess.php"){
+    echo '<script>'; 
+    echo 'alert("비밀번호 인증없이는 접근할 수 없습니다.")'; 
+    echo '</script>';
+    echo "<script>location.href='auth.php'</script>";
+  } 
+
   /* db에서 login_id, name값 가져옴 */
-  $sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
-  
-  //$sql = "SELECT login_id, u_name, profileNum FROM user_info WHERE id='194'"; //테스트용
+  //$sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
+  $sql = "SELECT login_id, u_name, profileNum FROM user_info WHERE id='194'"; //테스트용
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_row($result);
 ?>
