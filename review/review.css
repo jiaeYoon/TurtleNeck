@@ -76,6 +76,24 @@ header {
   color: white;
 }
 
+
+.navbar__submenu { /* 하위 메뉴 */
+  background-color: var(--accent-color);
+  list-style: none;
+  position: absolute;
+  padding: 0;
+  display: none;
+}
+
+.navbar__review:hover .navbar__submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__submenu li:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 header i {
   margin-right: 30px;
   font-size: 30px;
@@ -197,6 +215,7 @@ header i {
   color: gray;
   margin-bottom: 14px;
 }
+
 #upload {
   border: none;
   padding: 0.5rem;
@@ -254,25 +273,38 @@ header i {
   margin: 20px 0 20px 0;
 }
 
+/* 프로필 사진이라 바꿀게!*/
 .icon {
-  background-color: #ccc;
-  font-size: 30px;
-  border-radius: 20px;
-  padding: 15px;
+  background-color: rgba(74, 139, 204, 0.5);
+  width: 50px;
+  border-radius: 10px;
+  padding : 5px;
   display: inline-block;
 }
 
-.review__info {
-  display: inline-block;
+.icon_profile {
+  width: 100%;
 }
 
-.review__title {
+.review__user {
+  display: inline-block;
+  /* background-color: #bfcedd; */
+  height: 50px;
+  position: relative;
+  bottom: 13px;
+  margin-left:10px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 24px;
+}
+
+.review__meta {
+  width: 100%;
+  display: flex;
+  margin: 0%;
 }
 
 .review__rate {
-  font-size: 20px;
+  font-size: 22px;
   margin-right: 20px;
   display: inline-block;
 }
@@ -280,10 +312,32 @@ header i {
 .review__date {
   color: rgb(100, 100, 100);
   display: inline-block;
+  right: 10px;
+  text-align:right;
 }
 
+.review__product {
+  margin-top: 5px;
+  font-weight: bold;
+ }
+
 .review__content {
-  margin-top: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.review__more {
+  margin-top: 10px;
+  color: var(--accent-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.review__more:visited {
+  display: block;
 }
 
 @media screen and (max-width: 768px) {
@@ -348,6 +402,17 @@ header i {
   .navbar__menu a {
     text-decoration: none;
     color: white;
+  }
+
+  .navbar__submenu {
+    list-style: none;
+    position: static;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .navbar__submenu li:hover {
+    font-size: 15px;
   }
 
   .tooltip {

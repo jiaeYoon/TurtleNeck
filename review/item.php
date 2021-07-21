@@ -1,3 +1,26 @@
+<?php
+    $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
+  
+  // 한글 깨짐 방지
+  mysqli_query($conn, "set session character_set_connection=utf8;");
+  mysqli_query($conn, "set session character_set_results=utf8;");
+  mysqli_query($conn, "set session character_set_client=utf8;");
+
+  /* 세션에 저장해둔 사용자 id값 가져오기 */
+  session_start();
+  $id = $_SESSION;
+  $id = implode("", $id);
+
+  /* db에서 login_id, name값 가져옴 */
+  $sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
+  
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_row($result);
+
+  $profile_img = '../img/profile/'.$row[2].'.png';
+  $profile_name = $row[0];
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -52,30 +75,31 @@
         <div class="title__text">제품 리뷰</div>
       </div>
       <div class="container">
-        
         <div class="comment__title">작성하기</div>
-        <div id="hospital">
+        <form name="item_review" id="item_review" action="itemProcess.php" method="POST">  
+          <div id="item">
             제품 이름
-            <input type="text" id="hospital_name">
+            <input type="text" id="item_name">
           </div>
           <div class="rating-group">
             평점 &nbsp; <!---->
-            <input disabled checked class="rating__input rating__input--none" name="rating" id="rating" value="0" type="radio">
-            <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-              <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
-            <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-              <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
-            <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-              <input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
-            <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-              <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
-            <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-              <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+            <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+            <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+            <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+            <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+            <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+            <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
           </div>
-        <div class="comment">
+          <div class="comment">
           <textarea id="new-comment" name="new_comment" row=5 placeholder="리뷰를 작성해주세요."></textarea>
-          <button id="upload" type="submit" onclick="add_review()">업로드</button>
-        </div>
+          <input id="upload" type="submit" onclick="add_review()">업로드</button>
+          </div>
+		    </form>
         
         <select name="sort">
           <option value="">정렬</option>
@@ -96,7 +120,6 @@
         <div id="field"></div>
       </div>
         
-
     </div>
     
   </body>
@@ -122,13 +145,14 @@
 
     /* 리뷰 추가 */
     function add_review(){
-      var hos_check = document.getElementById('hospital_name').value;
+      var item_check = document.getElementById('item_name').value;
       var con_check = document.getElementById('new-comment').value;
       
       if (hos_check && con_check)
       {
         /*사용자 프로필 가져오기 */
-        var num = 1;
+        var num = "<? echo $profile_img;?>";
+		    var profile_name = "<? echo $profile_name;?>";
         var icon_profile = document.createElement('img');
         icon_profile.classList.add('icon_profile');
         icon_profile.setAttribute("src", "../img/profile/"+num+".png");
@@ -139,42 +163,15 @@
 
         var user_name = document.createElement('div');
         user_name.classList.add('review__user');
-        user_name.innerText = "사용자 이름";
+        user_name.innerText = profile_name;
 
-        // 제품 리뷰 
         var hos_name = document.createElement('div');
         hos_name.classList.add('review__product');
         hos_name.innerText = "제품 이름 : " + hos_check;
-        
-        // 평점 가져오기
-        var stars = document.createElement('div');
+
+        var stars = document.createElement('div'); //별 갯수 새는 함수 필요
         stars.classList.add('review__rate');
-        const starNodeList = document.getElementsByName('rating');
-        starNodeList.forEach((node) => {
-          if(node.checked) {
-            if (node.value == 0) {
-              if (confirm('정말로 별점0을 주시겠습니까?'))
-                stars.innerText = "☆☆☆☆☆";
-              else
-                alert("평점을 입력해주세요.");
-              }
-            if (node.value == 1) {
-              stars.innerText = "★☆☆☆☆";
-            }
-            if (node.value == 2) {
-              stars.innerText = "★★☆☆☆";
-            }
-            if (node.value == 3) {
-              stars.innerText = "★★★☆☆";
-            }
-            if (node.value == 4) {
-              stars.innerText = "★★★★☆";
-            }
-            if (node.value == 5) {
-              stars.innerText = "★★★★★";
-            }
-          }
-        })
+        stars.innerText = "평점 : ★★★ \n"; 
 
         var dates = document.createElement('div');
         dates.classList.add('review__date');

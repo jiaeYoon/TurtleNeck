@@ -1,3 +1,29 @@
+<?php
+    $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
+  
+  // 한글 깨짐 방지
+  mysqli_query($conn, "set session character_set_connection=utf8;");
+  mysqli_query($conn, "set session character_set_results=utf8;");
+  mysqli_query($conn, "set session character_set_client=utf8;");
+
+  /* 세션에 저장해둔 사용자 id값 가져오기 */
+  session_start();
+  $id = $_SESSION;
+  $id = implode("", $id);
+
+  /* db에서 login_id, name값 가져옴 */
+  $sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
+  
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_row($result);
+
+  $profile_img = '../img/profile/'.$row[2].'.png';
+  $profile_name = $row[0];
+
+
+  $sql = ""
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -54,7 +80,7 @@
 
       <div class="container">
         <div class="comment__title">작성하기</div>
-       
+        <form name="hos_review" id="hos_review" action="hospitalProcess.php" method="POST">
         <div id="hospital">
             병원 이름
             <input type="text" id="hospital_name"> &nbsp; <input type="button" value="검색">
@@ -75,12 +101,10 @@
           </div>
         <div class="comment">
           <textarea id="new-comment" name="new_comment" row=5 placeholder="리뷰를 작성해주세요."></textarea><br>
-          지역을 입력해주세요.
-          <br>
-          <input type="text" id="tags" name="tags" value="#" placeholder="해시태그">
+          <input type="text" id="tags" name="tags" value="태그를 입력하세요(#해시태그)">
           <button id="upload" type="submit" onclick="add_review()">업로드</button>
         </div>
-        
+        </form>f
         
         <select name="area" >
           <option value="">지역</option>
@@ -110,19 +134,14 @@
         </select>
 
         <div class="review__list">
-          <div class="icon"><img class = "icon_profile" src="../img/profile/1.png"></div>
-          <div class="review__user">사용자 이름</div>
-          <div class="review__meta">
+          <div class="icon"><i class="fas fa-hospital"></i></div>
+          <div class="review__info">
+            <div class="review__title">병원 이름</div>
+            <div class="review__address">주소</div>
             <div class="review__rate">★★★☆☆</div>
             <div class="review__date">2021-07-18</div>
           </div>
-            <div class="review__title">병원 이름</div>
-            <div class="review__address">주소</div>
-          <div class="review__content">내용 예시입니다. 세 줄 넘어가면 ... 표시로 바뀝니다<br>
-            21일 전력거래소는 이날 최대 전력 수요를 오후 5시 기준 88.93GW(잠정치)로 집계했다. 올여름 들어 가장 높은 수치다. 이전 최고 기록은 지난 15일 88.6GW였다.<br>
-            다만 걱정했던 전력 수급 비상사태는 없었다. 전력 사용량이 치솟으면서 이날 전력 예비력은 10.2GW, 공급 예비율은 12.1%까지 내려갔지만 수급 차질을 우려할 만한 수준은 아니었다. 통상 예비력이 10GW 이상이면 전력 공급이 안정됐다고 평가한다. 예비력이 5.5GW 이하로 떨어지면 ‘전력 수급 경보’를 발령해야 한다.
-          </div>
-          <div class="review__more">펼치기</div>
+          <div class="review__content">내용 예시입니다.</div>
         </div>
         
         <div id="field"></div>
@@ -156,10 +175,10 @@
     function add_review(){
       var hos_check = document.getElementById('hospital_name').value;
       var con_check = document.getElementById('new-comment').value;
-      var hos_address = document.getElementById('tags').value;
+      
       if (hos_check && con_check)
       {
-        var num = 1;
+		var num = 1;
         var icon_profile = document.createElement('img');
         icon_profile.classList.add('icon_profile');
         icon_profile.setAttribute("src", "../img/profile/"+num+".png");
@@ -176,21 +195,13 @@
         hos_name.classList.add('review__title');
         hos_name.innerText = "병원 이름 : " + hos_check;
 
-        var hos_tag = document.createElement('div');
-        hos_tag.classList.add('review__address');
-        hos_tag.innerText ="주소 : " + hos_address;
-
-
         var stars = document.createElement('div');
         stars.classList.add('review__rate');
         const starNodeList = document.getElementsByName('rating');
         starNodeList.forEach((node) => {
           if(node.checked) {
             if (node.value == 0) {
-              if (confirm('정말로 별점 0을 주시겠습니까?'))
-                stars.innerText = "☆☆☆☆☆";
-              else
-                alert("평점을 입력해주세요.")
+              stars.innerText = "☆☆☆☆☆";
             }
             if (node.value == 1) {
               stars.innerText = "★☆☆☆☆";
@@ -219,23 +230,17 @@
         dates.innerText =  year + "-" + ("0"+month).slice(-2) + "-" + ("0"+day).slice(-2);
 
         var rev_content = document.createElement('div');
-        rev_content.classList.add("review__content");
-        rev_content.innerText = con_check;
+        rev_content.classList.add("review_content");
+        rev_content.innerText = "리뷰 내용 : \n" + con_check;
         
-        var review_meta = document.createElement('div');
-        review_meta.classList.add('review__meta');
-        review_meta.appendChild(stars);
-        review_meta.appendChild(dates);
-
         var total = document.createElement('div');
         total.classList.add('review__list');
-        total.appendChild(icon);
+		total.appendChild(icon);
         total.appendChild(user_name);
-        total.appendChild(review_meta);
         total.appendChild(hos_name);
-        total.appendChild(hos_tag);
+        total.appendChild(stars);
         total.appendChild(rev_content);
-      
+        total.appendChild(dates);
         
         document.getElementById('field').appendChild(total);
         hos_check = "";
