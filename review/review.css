@@ -1,0 +1,426 @@
+:root {
+  --background-color: #fcf2e8;
+  --line-color: #4A8BCC;
+  --accent-color: #3D78B3;
+  --tooltip-color: #336699;
+  --tt-text-color: #f0f0f0;
+  --circle-color: #DDDDDD;
+  --bar-color: #F47575;
+}
+
+@font-face {
+  font-family: 'MapoPeacefull';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'MapoPeacefull';
+}
+
+/* header */
+header {
+  margin-bottom: 100px;
+  height: 0px;
+}
+
+#wave {
+  width: 100%;
+  height: 100px;
+  z-index: 1;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+#logo {
+  margin-top: 10px;
+  margin-left: 20px;
+  height: 55px;
+  cursor: pointer;
+}
+
+.navbar__menu {
+  list-style: none;
+  display:flex;
+  padding-left: 0;
+}
+
+.navbar__menu li {
+  padding: 8px 12px;
+  margin: 0px 10px;
+}
+
+.navbar__menu li:hover {
+  background-color: var(--accent-color);
+  border-radius: 8px;
+}
+
+.navbar__menu a {
+  text-decoration: none;
+  color: white;
+}
+
+
+.navbar__submenu { /* 하위 메뉴 */
+  background-color: var(--accent-color);
+  list-style: none;
+  position: absolute;
+  padding: 0;
+  display: none;
+}
+
+.navbar__review:hover .navbar__submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__submenu li:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+header i {
+  margin-right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+#toggleBtn {
+  display: none;
+}
+
+
+/* tooltip */
+.tooltip {
+  padding: 5px;
+  position: absolute;
+  top: 70px;
+  right: 25px;
+  z-index: 3;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--tooltip-color);
+  /*display: none;*/
+}
+
+.tooltip.active {
+  display: flex;
+}
+
+.tooltip::after {
+  border-top: 0px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--tooltip-color);
+  content:"";
+  position:absolute;
+  top:-10px;
+  right: 7px;
+}
+
+.tooltip a {
+  text-decoration: none;
+  color: var(--tt-text-color);
+  margin: 1px;
+  padding: 5px 10px;
+  width: 80%;
+  text-align: center;
+}
+
+.tooltip hr {
+  width: 90%;
+  border-bottom: 0px;
+  color: white;
+}
+
+.hidden__bg {
+    display: none;
+}
+
+.menu {
+  background-color: #DDDDDD;
+}
+
+#main {
+  margin-top: 100px;
+}
+
+/* title */
+.title {
+  margin-top: 50px;
+  margin-left: 15%;
+}
+
+.title__text {
+  position: absolute;
+  top: 200px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  align-items: center;
+  z-index: 2;
+}
+
+.title__line {
+  position: absolute;
+  top: 220px;
+  left: 14.7%;
+  width: 100px;
+  border: 10px solid rgba(74, 139, 204, 0.5);
+  z-index: 1;
+}
+
+.container {
+  margin-left: 15%;
+  width: 70%;
+  max-width: 1200px;
+}
+
+/* comment & rating */
+.comment__title {
+  font-weight: bold;
+  font-size: 20px;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+}
+
+#new-comment {
+  height: 80px;
+  font-size: 15px;
+  width : 50%;
+  font-family: 'MapoPeacefull';
+}
+
+#tags
+{
+  height:20px;
+  width:50%;
+  color: gray;
+  margin-bottom: 14px;
+}
+
+#upload {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.5s;
+  background: var(--line-color);
+  color: white;
+  font-size: 1rem;
+  font-family: 'MapoPeacefull';
+}
+
+#upload:hover {
+  background: var(--accent-color);
+}
+
+.rating-group {
+  display: inline-flex;
+}
+
+.rating__input {
+ display: none;
+}
+
+.rating__input--none {
+  display: none
+}
+
+.rating__label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 1.5rem;
+}
+
+.rating__icon--star {
+  color: var(--line-color);
+}
+
+.rating__input:checked ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+.rating-group:hover .rating__label .rating__icon--star {
+  color: var(--line-color);
+}
+
+.rating__input:hover ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+/* review list */
+.review__list {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px 0 20px 0;
+}
+
+/* 프로필 사진이라 바꿀게!*/
+.icon {
+  background-color: rgba(74, 139, 204, 0.5);
+  width: 50px;
+  border-radius: 10px;
+  padding : 5px;
+  display: inline-block;
+}
+
+.icon_profile {
+  width: 100%;
+}
+
+.review__user {
+  display: inline-block;
+  /* background-color: #bfcedd; */
+  height: 50px;
+  position: relative;
+  bottom: 13px;
+  margin-left:10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.review__meta {
+  width: 100%;
+  display: flex;
+  margin: 0%;
+}
+
+.review__rate {
+  font-size: 22px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.review__date {
+  color: rgb(100, 100, 100);
+  display: inline-block;
+  right: 10px;
+  text-align:right;
+}
+
+.review__product {
+  margin-top: 5px;
+  font-weight: bold;
+ }
+
+.review__content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.review__more {
+  margin-top: 10px;
+  color: var(--accent-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.review__more:visited {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  #logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    margin: 0px;
+  }
+
+  .navbar__btn {
+    position: absolute;
+    display: flex;
+    right: 30px;
+    top: 20px;
+  }
+  
+  #profile {
+    margin-right: 20px;
+  }
+  
+  #toggleBtn {
+    display: block;
+    margin-right: 0px;
+  }
+
+  .navbar {
+    display: block;
+  }
+
+  .hidden__bg {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .navbar__menu {
+    display: none;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    position: absolute;
+    right: 0px;
+    top: 70px;
+  }
+  
+  .navbar__menu li {
+    padding: 8px 12px;
+    margin: 10px 10px;
+  }
+  
+  .navbar__menu li:hover {
+    /* background-color: rgba(74, 139, 204, 0.5); */
+    background: none;
+    font-size: 18px;
+  }
+  
+  .navbar__menu a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .navbar__submenu {
+    list-style: none;
+    position: static;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .navbar__submenu li:hover {
+    font-size: 15px;
+  }
+
+  .tooltip {
+    right: 70px;
+  }
+
+  .navbar__menu.active,
+  .hidden__bg.active {
+    display: flex;
+  }
+}
