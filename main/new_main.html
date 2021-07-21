@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <title>TurtleNeck</title>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+    <nav class="navbar">
+      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <ul class="navbar__menu">
+        <li><a href="">30일 챌린지</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href="">마이페이지</a></li>
+        <li><a href="">랭킹</a></li>
+      </ul>
+      <div class="navbar__btn">
+        <i class="fas fa-user-circle" id="profile"></i>
+        <!-- toggle menu -->
+        <i class="fas fa-bars" id="toggleBtn"></i>
+      </div>
+    </nav>
+    <!-- tooltip -->
+    <div class="tooltip">
+      <a href="../main/main.html">마이 페이지</a>
+      <a href="../main/main.html">정보 수정</a>
+      <hr/>
+      <a href="../signup/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- hideen background -->
+  <div class="hidden__bg"></div>
+
+  <!-- title -->
+  <div class="title">
+    <div class="title__line"></div>
+    <div class="title__text">스트레칭 시작하기</div>
+  </div>
+
+  <!-- article -->
+  <div class="article">
+    <div class="exercises">
+      <!-- search -->
+      <div class="search">
+        <div class="search__hashtag">
+          <div class="hashtag__keyword"># 목</div>
+          <div class="hashtag__keyword"># 어깨</div>
+          <div class="hashtag__keyword"># 허리</div>
+        </div>
+        <div class="search__bar">
+          <form action="new_main.php" method="post">
+            <input type="text" name="keyword" class="search__text" autocomplete="off">
+            <button type="submit" class="search__btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- contents -->
+      <div class="contents">
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/neck_shoulder1.png" alt="목, 어깨 통증 예방 운동">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">목, 어깨 통증 예방 운동</div>
+            <div class="contents__info">잘못된 컴퓨터 사용 자세로 생긴 목과 어깨 통증을 예방하는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 목</div>
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/shoulder4.png" alt="어깨 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">어깨 스트레칭</div>
+            <div class="contents__info">뭉친 어깨를 풀어주는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/arm_shoulder1.png" alt="팔, 어깨 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">팔, 어깨 스트레칭</div>
+            <div class="contents__info">팔과 어깨 근육을 이완시켜줌으로써 통증을 줄여주는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 팔</div>
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/pelvic1.png" alt="골반 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">골반 스트레칭</div>
+            <div class="contents__info">장시간 편향적인 자세로 앉아있으면서 틀어진 골반을 바로잡는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 골반</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/neck_shoulder1.png" alt="목, 어깨 통증 예방 운동">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">목, 어깨 통증 예방 운동</div>
+            <div class="contents__info">잘못된 컴퓨터 사용 자세로 생긴 목과 어깨 통증을 예방하는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 목</div>
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/shoulder4.png" alt="어깨 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">어깨 스트레칭</div>
+            <div class="contents__info">뭉친 어깨를 풀어주는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/arm_shoulder1.png" alt="팔, 어깨 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">팔, 어깨 스트레칭</div>
+            <div class="contents__info">팔과 어깨 근육을 이완시켜줌으로써 통증을 줄여주는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 팔</div>
+              <div class="hashtag__keyword"># 어깨</div>
+            </div>
+          </div>
+        </div>
+        <div class="contents__btn">
+          <div class="contents__image">
+            <img src="../exercise/ex_image/pelvic1.png" alt="골반 스트레칭">
+          </div>
+          <div class="contents__text">
+            <div class="contents__title">골반 스트레칭</div>
+            <div class="contents__info">장시간 편향적인 자세로 앉아있으면서 틀어진 골반을 바로잡는 스트레칭</div>
+            <div class="contents__hashtag">
+              <div class="hashtag__keyword"># 골반</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- banner -->
+    <div class="section">
+      <input type="radio" name="slide" id="slide01" checked>
+      <input type="radio" name="slide" id="slide02">
+      <input type="radio" name="slide" id="slide03">
+      <div class="slidewrap">
+        <ul class="slidelist">
+          <!-- 슬라이드 영역 -->
+          <li class="slideitem">
+            <a href="https://map.naver.com/v5/search/%EC%A0%95%ED%98%95%EC%99%B8%EA%B3%BC" target='_blank'>
+              <div class="textbox">
+                <h3>가까운 병원</h3>
+                <p>내 위치와 가까운 정형외과를<br> 안내해 드려요</p>
+              </div>
+              <img src="https://pbs.twimg.com/media/E1-c21aUYAcBVNL?format=png">
+            </a>
+          </li>
+          <li class="slideitem">
+            <a href="../selfcheck/Banner_SelfCheck.html">
+              <div class="textbox">
+                <h3>자가진단</h3>
+                <p>지금 내 상태는 어떨까?</p>
+              </div>
+              <img src="https://pbs.twimg.com/media/E1-eOLoUcAIKnIL?format=png">
+            </a>
+          </li>
+          <li class="slideitem">
+            <a href="http://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31866" target='_blank'>
+              <div class="textbox" target='_blank'>
+                <h3>질환 정보</h3>
+                <p>거북목 증후군이란?</p>
+              </div>
+              <img src="../img/bg.png">
+            </a>
+          </li class="slideitem">
+  
+        </ul>
+        <!-- 페이징 -->
+        <ul class="slide-pagelist">
+          <li><label for="slide01"></label></li>
+          <li><label for="slide02"></label></li>
+          <li><label for="slide03"></label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
