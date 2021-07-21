@@ -86,23 +86,18 @@
         <div class="tutorial__title">동작 설명</div>
 
         <!-- exercise information -->
-        <table>
-          <tr>
-            <td rowspan="2">
-              <!-- image -->
-              <div class="tutorial__image">
-                <img src="" id="tt_img" alt="exercise">
-              </div>
-            </td>
-            <td id="tt_expl"></td>
-          </tr>
-          <tr>
-            <td class="tutorial__timer">
+        <div class="tutorial__content">
+          <div class="tutorial__image">
+            <img src="" id="tt_img" alt="exercise">
+          </div>
+          <div class="tutorial__info">
+            <div id="tt_expl"></div>
+            <div class="tutorial__timer">
               <i class="fas fa-stopwatch"></i>
-              <span id="tt_sec"></span>s
-            </td>
-          </tr>
-        </table>
+              <span id="tt_sec">10</span>s
+            </div>
+          </div>
+        </div>
 
         <!-- start -->
         <div class="tutorial__start">시작하기</div>
