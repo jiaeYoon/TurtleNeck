@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자가진단</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <link rel="stylesheet" href="SelfCheck.css">
+  <script src="SelfCheck.js" defer></script>
+  </head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
+      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+    <!-- 로그아웃 -->
+    <i class="fas fa-user-circle" id="profile"></i>
+    <!-- 말풍선 -->
+    <div class="tooltip">
+      <!-- 나중에 회원정보 추가하기 -->
+      <a href="../challenge/challenge.php">마이 페이지</a>
+      <hr/>
+      <a href="../signin/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- 본문 -->
+  <main class="main">
+    <img class="beach" src="../img/beach.svg" alt="main page">
+    <img class="turtle" src="../img/turtle.svg" alt="turtle">
+    
+    <div class="container">
+      <h1>자가진단</h1>
+      <h4>현재 상태를 체크해보세요.</h4>
+      <!--Check List-->
+      <form action="SignUp_SelfCheck.php" method="GET">
+        <label><input type="checkbox" name="check1">의자에 앉아있는 시간이 8시간 이상이다.</label><br/>
+        <label><input type="checkbox" name="check2">피곤할 때 가끔 두통이 발생한다.</label><br/>
+        <label><input type="checkbox" name="check3">자세가 구부정하다는 소리를 자주 듣는다.</label><br/>
+        <label><input type="checkbox" name="check4">잠을 자도 개운하지 않고 피곤하다.</label><br/>
+        <label><input type="checkbox" name="check5">목을 뒤로 젖힐 때, 통증이 있거나 뻐근한 느낌이 든다.</label><br/>
+        <label><input type="checkbox" name="check6">사진을 보면 언제나 목이 기울어있다.</label><br/>
+        <label><input type="checkbox" name="check7">자고 일어나면 목이 아프다.</label><br/>
+        <label><input type="checkbox" name="check8">컴퓨터를 하루 8시간 이상, 스마트폰을 하루 4시간 이상 사용한다.</label><br/>
+        <label><input type="checkbox" name="check9">하루종일 자도 피곤하다(만성피로).</label><br/>
+        <label><input type="checkbox" name="check10">지하철에서 스마트폰을 볼 떄 눈높이에 맞추지 않는다.</label><br/>
+        <label><input type="checkbox" name="check11">평소 목을 앞으로 내민 채 컴퓨터를 사용한다.</label><br/>
+        <button id="result" type="submit">결과 확인하기</button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

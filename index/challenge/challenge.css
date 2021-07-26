@@ -1,0 +1,82 @@
+/* header */
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+
+/* month */
+.month {
+  /* border:dotted; */
+  width: 280px;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  padding: 1px;
+  margin: 0px auto;
+}
+
+.m_num {
+  display: inline-block;
+  font-size: 24pt;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.m_eng {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 24pt;
+  font-weight: bold;
+  margin-bottom: 15px;
+
+}
+
+.year {
+  display: inline-block;
+  font-size: 10pt;
+  color: #313131;
+}
+
+/* button */
+#btn_prev, #btn_next {
+  margin: 20px;
+  font-size: 25pt;
+  cursor: pointer;
+}
+
+#btn_prev {
+  margin-left: 20px;
+}
+
+/* calendar */
+.calendar {
+  /* border: 1px solid #7e7e7e; */
+  border-collapse: collapse;
+}
+
+th {
+  /* background-color: #dddddd; */
+  /* border: 1px solid #7e7e7e; */
+  width: 8%;
+  border-top: 1px solid #7e7e7e;
+  border-bottom: 1px solid #7e7e7e;
+  min-width: 5vw;
+  max-width: 20vw;
+  padding: 5px;
+}
+
+td {
+  /* border: solid; */
+  padding: 5px;
+  margin: 0px 15px 0px 15px;
+  vertical-align: top;
+}
+
+td i {
+  font-size: 30px;
+}
+
+.day {
+  text-align: center;
+  margin: 10px;
+}
