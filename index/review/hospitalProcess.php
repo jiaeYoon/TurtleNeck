@@ -10,13 +10,11 @@
 	  session_start();
 	  if (isset($_SESSION['userId']))
 	  {
-		echo "로그인상태입니다.";
 		$id = $_SESSION['userId'];
 		$id = implode("",$id);
 	  }
 	  else
 	  {
-		echo "세션이 만료되었거나 비회원입니다.";
 ?>
 <script>
 	  alert("세션이 만료되어있거나 비회원입니다.");

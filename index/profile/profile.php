@@ -11,7 +11,6 @@
   session_start();
   if (isset($_SESSION['userId']))
   {
-    echo "로그인상태입니다.";
     $id = $_SESSION['userId'];
     $id = implode("",$id);
   }

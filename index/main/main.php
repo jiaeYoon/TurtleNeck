@@ -8,7 +8,21 @@
 
   /* 세션 값 가져오기 */
   session_start();
-  $id = implode("", $id);
+  if (isset($_SESSION['userId']))
+  {
+    $id = $_SESSION['userId'];
+    $id = implode("",$id);
+  }
+  else
+  {
+  ?>
+  <script>
+  alert("세션이 만료되어있거나 비회원입니다.");
+  location.href = "../index.html";
+  </script>
+  <?php
+
+  }
 
   /* 운동 목록 가져오기 */
   $sql = "SELECT ex_id, ex_name, ex_sname, ex_info, ex_image, hashtag 
