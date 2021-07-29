@@ -35,13 +35,9 @@
   $result = mysqli_query($conn, $sql);
   while($row = mysqli_fetch_row($result))
   {
-    $row = mysqli_fetch_row($result);
+    $rank_name[$i] = $row[1];
+    $rank_count[$i] = $row[2];
 
-    while($i < 10)
-    {
-      $rank_name[$i] = $row[1];
-      $rank_count[$i] = $row[2];
-    }
     if ($row[0] == $id)
     {
       $myrank = $i;
