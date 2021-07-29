@@ -1,5 +1,27 @@
+#contents{
+    text-align: center;
+}
+
 #auth_body{
-    margin-left: 25%;
+    display: inline-block;
+    width: 40%;
     margin-top: 5%;
     align-items: center;
+}
+
+#warning_text{
+    margin-bottom: 6%;
+    line-height: 180%;
+    font-size: large;
+}
+
+#input_pw{
+    margin-left: 5%;
+}
+
+#btn_modify{
+    margin-top: 6.5%;
+    margin-right: 8%;
+    padding: 7px;
+    font-size: initial;
 }

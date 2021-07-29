@@ -1,7 +1,24 @@
 <?php
+    //세션에 있는 id 값 가져오기
+  //   session_start();
+  //   if (isset($_SESSION['userId']))
+  //   {
+  //     $id = $_SESSION['userId'];
+  //   }
+  //   else
+  //   {
+  // ? >
+  // <script>
+  //   alert("세션이 만료되어있거나 비회원입니다.");
+  //   location.href = "../index.html";
+  // </script>
+  // <?php
+
+  // }   
+
+  /* 세션 값 가져오기 */
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  $id = $_SESSION['userId'];
 
   $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
   // user_info에 저장된 시작 날짜 가져오기
@@ -56,12 +73,17 @@
   <header>
     <img id="wave" src="../img/sea.svg" alt="wave">
     <nav class="navbar">
-      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
       <ul class="navbar__menu">
-        <li><a href="">30일 챌린지</a></li>
-        <li><a href="">커뮤니티</a></li>
-        <li><a href="">마이페이지</a></li>
-        <li><a href="">랭킹</a></li>
+        <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
+        <li class="navbar__review"><a href="../review/hospital.php">리뷰</a>
+          <ul class="navbar__submenu">
+            <li><a href="../review/hospital.php">병원 리뷰</a></li>
+            <li><a href="../review/item.php">제품 리뷰</a></li>
+          </ul>
+        </li>
+        <li><a href="../stats/stats.php">통계</a></li>
+        <li><a href="../ranking/ranking.php">랭킹</a></li>
       </ul>
       <div class="navbar__btn">
         <i class="fas fa-user-circle" id="profile"></i>
@@ -71,8 +93,8 @@
     </nav>
     <!-- tooltip -->
     <div class="tooltip">
-      <a href="../main/main.html">마이 페이지</a>
-      <a href="../main/main.html">정보 수정</a>
+      <a href="../stats/stats.php">통계</a>
+      <a href="../modify/auth.php">정보 수정</a>
       <hr/>
       <a href="../signup/logoutProcess.php">로그아웃</a>
     </div>

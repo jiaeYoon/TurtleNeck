@@ -16,6 +16,15 @@ canvas {
   font-weight: bold;
 }
 
+#title__line {
+  position: absolute;
+  top: 220px;
+  left: 14.7%;
+  width: 90px;
+  border: 10px solid rgba(74, 139, 204, 0.5);
+  z-index: 1;
+}
+
 table{
   /* border: 2px dotted red; */
   table-layout: auto;

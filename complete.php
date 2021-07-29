@@ -3,8 +3,7 @@
   
   /* 세션에 저장해둔 사용자 아이디(login_id)값 가져오기 */
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  $id = $_SESSION['userId'];
   
   /* challenge 테이블에 사용자의 id값, 날짜 삽입 */
   $sql = "INSERT INTO challenge(id, c_date) VALUES($id, now())";

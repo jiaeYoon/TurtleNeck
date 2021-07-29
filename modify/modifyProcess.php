@@ -8,8 +8,7 @@
 
     /* 세션에 저장해둔 사용자 id값 가져오기 */
     session_start();
-    $id = $_SESSION;
-    $id = implode("", $id);
+    $id = $_SESSION['userId'];
 
     $hashedPassword = password_hash($_POST['PW'], PASSWORD_DEFAULT);
 

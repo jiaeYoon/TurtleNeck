@@ -25,7 +25,7 @@ if (password_verify($password, $hashedPassword)) {
     $_SESSION['userId'] = $row['id'];
 ?>
     <script>
-        location.href = "../main/main.html";
+        location.href = "../main/main.php";
     </script>
 <?php
 } else {

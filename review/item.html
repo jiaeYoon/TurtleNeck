@@ -14,13 +14,13 @@
     <header>
       <img id="wave" src="../img/sea.svg" alt="wave"> 
       <nav class="navbar">
-        <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
         <ul class="navbar__menu">
-          <li><a href="">30일 챌린지</a></li>
+          <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
           <li class="navbar__review"><a href="">리뷰</a>
             <ul class="navbar__submenu">
-              <li><a href="../review/hospital.html">병원 리뷰</a></li>
-              <li><a href="../review/item.html">제품 리뷰</a></li>
+              <li><a href="../review/hospital.php">병원 리뷰</a></li>
+              <li><a href="../review/item.php">제품 리뷰</a></li>
             </ul>
           </li>
           <li><a href="">마이페이지</a></li>
@@ -56,7 +56,7 @@
         <div class="comment__title">작성하기</div>
         <div id="hospital">
             제품 이름
-            <input type="text" id="hospital_name">
+            <input type="text" id="item_name">
           </div>
           <div class="rating-group">
             평점 &nbsp; <!---->
@@ -73,7 +73,7 @@
               <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
           </div>
         <div class="comment">
-          <textarea id="new-comment" name="new_comment" row=5 placeholder="리뷰를 작성해주세요."></textarea>
+          <textarea id="new-comment" name="new_comment" row=6 placeholder="리뷰를 작성해주세요."></textarea>
           <button id="upload" type="submit" onclick="add_review()">업로드</button>
         </div>
         
@@ -91,7 +91,10 @@
             <div class="review__date">2021-07-18</div>
           </div>
           <div class="review__product">제품 이름</div>
-          <div class="review__content">내용 예시입니다.</div>
+          <div class="review__content">내용 예시입니다. 세 줄 넘어가면 ... 표시로 바뀝니다<br>
+            21일 전력거래소는 이날 최대 전력 수요를 오후 5시 기준 88.93GW(잠정치)로 집계했다. 올여름 들어 가장 높은 수치다. 이전 최고 기록은 지난 15일 88.6GW였다.<br>
+            다만 걱정했던 전력 수급 비상사태는 없었다. 전력 사용량이 치솟으면서 이날 전력 예비력은 10.2GW, 공급 예비율은 12.1%까지 내려갔지만 수급 차질을 우려할 만한 수준은 아니었다. 통상 예비력이 10GW 이상이면 전력 공급이 안정됐다고 평가한다. 예비력이 5.5GW 이하로 떨어지면 ‘전력 수급 경보’를 발령해야 한다.</div>
+          <div class="review__more" onclick="openContent(0)">펼치기</div>
         </div>
         <div id="field"></div>
       </div>
@@ -120,12 +123,12 @@
       tooltip.classList.toggle('active');
     });
 
+    let idx = 0;
     /* 리뷰 추가 */
     function add_review(){
-      var hos_check = document.getElementById('hospital_name').value;
+      var item_check = document.getElementById('item_name').value;
       var con_check = document.getElementById('new-comment').value;
-      
-      if (hos_check && con_check)
+      if (item_check && con_check)
       {
         /*사용자 프로필 가져오기 */
         var num = 1;
@@ -142,9 +145,9 @@
         user_name.innerText = "사용자 이름";
 
         // 제품 리뷰 
-        var hos_name = document.createElement('div');
-        hos_name.classList.add('review__product');
-        hos_name.innerText = "제품 이름 : " + hos_check;
+        var item_name = document.createElement('div');
+        item_name.classList.add('review__product');
+        item_name.innerText = "제품 이름 : " + item_check;
         
         // 평점 가져오기
         var stars = document.createElement('div');
@@ -153,7 +156,7 @@
         starNodeList.forEach((node) => {
           if(node.checked) {
             if (node.value == 0) {
-              if (confirm('정말로 별점0을 주시겠습니까?'))
+              if (confirm('정말로 별점 0을 주시겠습니까?'))
                 stars.innerText = "☆☆☆☆☆";
               else
                 alert("평점을 입력해주세요.");
@@ -185,32 +188,50 @@
         dates.innerText =  year + "-" + ("0"+month).slice(-2) + "-" + ("0"+day).slice(-2);
 
         var rev_content = document.createElement('div');
-        rev_content.classList.add('review__content');
+        rev_content.classList.add("review__content");
         rev_content.innerText = "리뷰 내용 : " + con_check;
-        
+
+        var this_idx = ++idx;
+        var review_more = document.createElement('div');
+        review_more.classList.add("review__more");
+        review_more.innerText = "펼치기";
+        review_more.onclick = function(){
+          openContent(this_idx);
+        }
 
         var review_meta = document.createElement('div');
         review_meta.classList.add('review__meta');
         review_meta.appendChild(stars);
         review_meta.appendChild(dates);
 
-
         var total = document.createElement('div');
         total.classList.add('review__list');
         total.appendChild(icon);
         total.appendChild(user_name);
         total.appendChild(review_meta);
-        total.appendChild(hos_name);
+        total.appendChild(item_name);
         total.appendChild(rev_content);
-    
+        total.appendChild(review_more);
         
         document.getElementById('field').appendChild(total);
-        hos_check = "";
+        item_check = "";
         con_check = "";
       }
       else
         alert('모두 입력해 주세요.');
     }
     
+    /* 펼치기/접기 버튼 test */
+    function openContent(idx) {
+      const review_content = document.getElementsByClassName("review__content")[idx];
+      if (review_content.style.display != "block") {
+        review_content.style.display = "block";
+        document.getElementsByClassName("review__more")[idx].innerText = "접기";
+      }
+      else {
+        review_content.style.display = "-webkit-box";
+        document.getElementsByClassName("review__more")[idx].innerText = "펼치기";
+      }
+    }
   </script>
 </html>

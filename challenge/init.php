@@ -1,7 +1,25 @@
 <?php
+  //세션에 있는 값 가져오기
+  // session_start();
+  // if (isset($_SESSION['userId']))
+  // {
+  //   $id = $_SESSION['userId'];
+  // }
+  // else
+  // {
+  //   echo "세션이 만료되었거나 비회원입니다.";
+  // ? >
+  // <script>
+  // alert("세션이 만료되어있거나 비회원입니다.");
+  // location.href = "index.html";
+  // </script>
+  // <?php
+  // // header('Location: /index.html');
+  // }   
+
+  /* 세션 값 가져오기 */
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  $id = $_SESSION['userId'];
 
   $conn = mysqli_connect("us-cdbr-east-03.cleardb.com", "bb0e75dfd58ff1", "73c3064a", "heroku_1189b05c9eafafd");
   $sql = "SELECT startDate FROM user_info WHERE id = ${id}";

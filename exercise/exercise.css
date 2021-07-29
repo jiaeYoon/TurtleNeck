@@ -31,6 +31,17 @@ header {
   z-index: 1;
 }
 
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+}
+
 #logo {
   margin: 10px;
   height: 55px;
@@ -41,28 +52,67 @@ header {
   cursor: pointer;
 }
 
-header i {
-  margin: 15px;
-  font-size: 40px;
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+}
+
+.navbar__menu li {
+  padding: 8px 12px;
+  margin: 0px 10px;
+}
+
+.navbar__menu li:hover {
+  background-color: var(--accent-color);
+  border-radius: 8px;
+}
+
+.navbar__menu a {
+  text-decoration: none;
   color: white;
+}
+
+.navbar__submenu { /* 하위 메뉴 */
+  background-color: var(--accent-color);
+  list-style: none;
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 0;
+  display: none;
+}
+
+.navbar__review:hover .navbar__submenu {
+  display: flex;
+}
+
+.navbar__submenu li:hover {
+  background-color: var(--tooltip-color);
+}
+
+header i {
+  margin-right: 30px;
+  font-size: 30px;
+  color: white;
   cursor: pointer;
 }
 
+#toggleBtn {
+  display: none;
+}
+
+/* tooltip */
 .tooltip {
   padding: 5px;
   position: absolute;
   top: 70px;
-  right: 15px;
+  right: 25px;
   z-index: 3;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   background-color: var(--tooltip-color);
-  display: none;
 }
 
 .tooltip.active {
@@ -95,6 +145,10 @@ header i {
   color: white;
 }
 
+.hidden__bg {
+  display: none;
+}
+
 /* tutorial */
 .tutorial {
   background-color: rgba(0, 0, 0, 0.8);
@@ -103,7 +157,7 @@ header i {
   height: 100%;
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: 5;
 }
 
 .tutorial__title {
@@ -280,5 +334,108 @@ h1 {
 
   .tutorial__timer {
     text-align: center;
+  }
+
+  #logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    margin: 0px;
+  }
+
+  .navbar__btn {
+    position: absolute;
+    display: flex;
+    right: 30px;
+    top: 20px;
+  }
+
+  #profile {
+    margin-right: 20px;
+  }
+
+  #toggleBtn {
+    display: block;
+    margin-right: 0px;
+  }
+
+  .navbar {
+    display: block;
+  }
+
+  .hidden__bg {
+    display: none;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .navbar__menu {
+    display: none;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    position: absolute;
+    right: 0px;
+    top: 70px;
+  }
+
+  .navbar__menu li {
+    padding: 8px 12px;
+    margin: 10px 10px;
+  }
+
+  .navbar__menu li:hover {
+    background: none;
+    font-size: 18px;
+  }
+
+  .navbar__menu a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .navbar__submenu {
+    flex-direction: column;
+    list-style: none;
+    position: static;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .navbar__submenu li:hover {
+    font-size: 18px;
+  }
+
+  .tooltip {
+    right: 70px;
+    z-index: 4;
+  }
+
+  .tooltip.active {
+    position: fixed;
+  }
+
+  .hidden__bg.active {
+    display: flex;
+    z-index: 3;
+  }
+
+  .navbar__menu.active {
+    display: flex;
+    position: fixed;
+  }
+
+  #profile.active {
+    position: fixed;
+    right: 56px;
+  }
+
+  #toggleBtn.active {
+    position: fixed;
+    right: 30px;
   }
 }

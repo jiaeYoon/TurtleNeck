@@ -10,9 +10,7 @@
   session_start();
   if (isset($_SESSION['userId']))
   {
-    echo "로그인 상태입니다.";
     $id = $_SESSION['userId'];
-    $id = implode("",$id);
   }
   else
   {
@@ -24,16 +22,14 @@
   <?php
     // header('Location: /index.html');
   }   
-  $id = implode("", $id);
 
   /* db에서 login_id, name값 가져옴 */
-  $sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
-  // $sql = "SELECT login_id, u_name FROM user_info WHERE id=194";
+  $sql = "SELECT login_id, u_name,profileNum FROM user_info WHERE id='{$id}'";
   
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_row($result);
 
-  $profile_img = '../img/profile/'.$row[2].'.png';
+  $profile_img = isset($row[2]) ? '../img/profile/'.$row[2].'.png' : '../img/profile/1.png';
   $profile_name = $row[0];
 
   /* db에서 item_review 값 가져옴 */
@@ -92,14 +88,14 @@
         <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
         <ul class="navbar__menu">
           <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
-          <li class="navbar__review"><a href="">리뷰</a>
+          <li class="navbar__review"><a href="../review/hospital.php">리뷰</a>
             <ul class="navbar__submenu">
               <li><a href="../review/hospital.php">병원 리뷰</a></li>
               <li><a href="../review/item.php">제품 리뷰</a></li>
             </ul>
           </li>
           <li><a href="../stats/stats.php">통계</a></li>
-          <li><a href="../modify/modify.php">랭킹</a></li>
+          <li><a href="../ranking/ranking.php">랭킹</a></li>
         </ul>
         <div class="navbar__btn">
           <i class="fas fa-user-circle" id="profile"></i>
@@ -110,8 +106,7 @@
       <!-- tooltip -->
       <div class="tooltip">
         <a href="../stats/stats.php">통계</a>
-        <a href="../stats/history.php">지난 챌린지</a>
-        <a href="../modify/modify.php">정보 수정</a>
+        <a href="../modify/auth.php">정보 수정</a>
         <hr/>
         <a href="../signup/logoutProcess.php">로그아웃</a>
       </div>

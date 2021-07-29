@@ -11,7 +11,7 @@
 <body>
 	<header>
 		<img id="wave" src="../img/sea.svg" alt="wave">
-		<img id="logo" src="../img/turtleneck_logo.svg" alt="logo" href="mainpage.html"><!--메인페이지로 이동하기-->
+		<img id="logo" src="../img/turtleneck_logo.svg" alt="logo" href="../main/main.php"><!--메인페이지로 이동하기-->
 	  </header>
 	<!-- Sign In Box -->
 	<div id = "all">
@@ -55,7 +55,7 @@
 		signupForm.submit();
 		}else{
 			alert("비밀번호가 서로 일치하지 않습니다");
-			location.href = "signin.html";
+			location.href = "../index.html";
 			event.stopImmediatePropagation();
 		}
 	});

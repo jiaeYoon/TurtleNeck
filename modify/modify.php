@@ -8,21 +8,32 @@
 
   /* 세션에 저장해둔 사용자 id값 가져오기 */
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  if (isset($_SESSION['userId']))
+  {
+    $id = $_SESSION['userId'];
+  }
+  else
+  {
+  ?>
+  <script>
+  alert("세션이 만료되어있거나 비회원입니다.");
+  location.href = "../index.html";
+  </script>
+  <?php
+  }   
 
   /* url을 통한 페이지 접근 차단 */
-  $prevPage = $_SERVER["HTTP_REFERER"];
-  if(substr($prevPage, -15, ) != "authProcess.php"){
-    echo '<script>'; 
-    echo 'alert("비밀번호 인증없이는 접근할 수 없습니다.")'; 
-    echo '</script>';
-    echo "<script>location.href='auth.php'</script>";
-  } 
+  // $prevPage = $_SERVER["HTTP_REFERER"];
+  // if(substr($prevPage, -15, ) != "authProcess.php"){
+  //   echo '<script>'; 
+  //   echo 'alert("비밀번호 인증없이는 접근할 수 없습니다.")'; 
+  //   echo '</script>';
+  //   echo "<script>location.href='auth.php'</script>";
+  // } 
 
   /* db에서 login_id, name값 가져옴 */
-  //$sql = "SELECT login_id, u_name FROM user_info WHERE id='{$id}'";
-  $sql = "SELECT login_id, u_name, profileNum FROM user_info WHERE id='194'"; //테스트용
+  $sql = "SELECT login_id, u_name, profileNum FROM user_info WHERE id='{$id}'";
+  //$sql = "SELECT login_id, u_name, profileNum FROM user_info WHERE id='194'"; //테스트용
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_row($result);
 ?>
@@ -55,28 +66,39 @@
 
 <body>
   
-<!-- header -->
-	<header>
-		<img id="wave" src="../img/sea.svg" alt="wave"> 
-		<nav class="navbar">
-			<a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
-			<ul class="navbar__menu">
-			<li><a href="">30일 챌린지</a></li>
-			<li><a href="">커뮤니티</a></li>
-			<li><a href="">마이페이지</a></li>
-			<li><a href="">정보 수정</a></li>
-			</ul>
-			<i class="fas fa-user-circle" id="profile"></i>
-		</nav>
-		
+  <!-- header -->
+  <header>
+    <img id="wave" src="../img/sea.svg" alt="wave">
+    <nav class="navbar">
+      <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+      <ul class="navbar__menu">
+        <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
+        <li class="navbar__review"><a href="../review/hospital.php">리뷰</a>
+          <ul class="navbar__submenu">
+            <li><a href="../review/hospital.php">병원 리뷰</a></li>
+            <li><a href="../review/item.php">제품 리뷰</a></li>
+          </ul>
+        </li>
+        <li><a href="../stats/stats.php">통계</a></li>
+        <li><a href="../ranking/ranking.php">랭킹</a></li>
+      </ul>
+      <div class="navbar__btn">
+        <i class="fas fa-user-circle" id="profile"></i>
+        <!-- toggle menu -->
+        <i class="fas fa-bars" id="toggleBtn"></i>
+      </div>
+    </nav>
     <!-- tooltip -->
-		<div class="tooltip">
-			<a href="../main/main.html">마이 페이지</a>
-			<a href="../main/main.html">정보 수정</a>
-			<hr/>
-			<a href="../signup/logoutProcess.php">로그아웃</a>
-		</div>
-	</header>
+    <div class="tooltip">
+      <a href="../stats/stats.php">통계</a>
+      <a href="../modify/auth.php">정보 수정</a>
+      <hr/>
+      <a href="../signup/logoutProcess.php">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- hideen background -->
+  <div class="hidden__bg"></div>
 
 	<!-- title -->
 	<div class="title">
@@ -134,4 +156,26 @@
 
 	
 </body>
+<script>
+  'use strict';
+
+  /* header buttons(profile, menu bar) */
+  const toggleBtn = document.querySelector('#toggleBtn');
+  const profileBtn = document.querySelector('#profile');
+
+  const menu = document.querySelector('.navbar__menu');
+  const hidden_box = document.querySelector('.hidden__bg');
+  const tooltip = document.querySelector('.tooltip');
+
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('active');
+    hidden_box.classList.toggle('active');
+    toggleBtn.classList.toggle('active');
+    profileBtn.classList.toggle('active');
+  });
+
+  profileBtn.addEventListener('click', () => {
+    tooltip.classList.toggle('active');
+  });
+</script>
 </html>

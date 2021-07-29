@@ -6,16 +6,32 @@
   mysqli_query("SET session character_set_client=utf8;");
 
   /*세션에 있는 id값 가져오기 */
+  // 세션값이 있는지 확인
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  if (isset($_SESSION['userId']))
+  {
+    $id = $_SESSION['userId'];
+  }
+  else
+  {
+  ?>
+  <script>
+  alert("세션이 만료되어있거나 비회원입니다.");
+  location.href = "../index.html";
+  </script>
+  <?php
+  }   
 
   /* 순위권(월별) 정보 배열에 저장하기  */
   $rank_name = array();
   $rank_count = array();
   $i = 0;
 
-  $sql = "SELECT challenge.id, u_name, COUNT(if(MONTH(challenge.c_date) = MONTH(now()), challenge.id, null)) AS cc  FROM challenge,user_info WHERE challenge.id = user_info.id GROUP BY challenge.id ORDER BY cc DESC;";
+  $sql = "SELECT challenge.id, u_name, COUNT(if(MONTH(challenge.c_date) = MONTH(now()), challenge.id, null)) AS cc  
+          FROM challenge,user_info 
+          WHERE challenge.id = user_info.id 
+          GROUP BY challenge.id 
+          ORDER BY cc DESC;";
   $result = mysqli_query($conn, $sql);
   while($row = mysqli_fetch_row($result))
   {
@@ -57,26 +73,37 @@
 
     <!-- header -->
     <header>
-      <img id="wave" src="../img/sea.svg" alt="wave"> 
+      <img id="wave" src="../img/sea.svg" alt="wave">
       <nav class="navbar">
-        <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
         <ul class="navbar__menu">
-        <li><a href="">30일 챌린지</a></li>
-        <li><a href="">커뮤니티</a></li>
-        <li><a href="">마이페이지</a></li>
-        <li><a href="">정보 수정</a></li>
+          <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
+          <li class="navbar__review"><a href="">리뷰</a>
+            <ul class="navbar__submenu">
+              <li><a href="../review/hospital.php">병원 리뷰</a></li>
+              <li><a href="../review/item.php">제품 리뷰</a></li>
+            </ul>
+          </li>
+          <li><a href="../stats/stats.php">통계</a></li>
+          <li><a href="../ranking/ranking.php">랭킹</a></li>
         </ul>
-        <i class="fas fa-user-circle" id="profile"></i>
+        <div class="navbar__btn">
+          <i class="fas fa-user-circle" id="profile"></i>
+          <!-- toggle menu -->
+          <i class="fas fa-bars" id="toggleBtn"></i>
+        </div>
       </nav>
-
       <!-- tooltip -->
       <div class="tooltip">
-        <a href="../main/main.html">마이 페이지</a>
-        <a href="../main/main.html">정보 수정</a>
+        <a href="../stats/stats.php">통계</a>
+        <a href="../modify/auth.php">정보 수정</a>
         <hr/>
         <a href="../signup/logoutProcess.php">로그아웃</a>
       </div>
     </header>
+    
+    <!-- hideen background -->
+    <div class="hidden__bg"></div>
 
     <!-- title -->
     <div class="title">

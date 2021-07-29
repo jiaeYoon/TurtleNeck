@@ -43,7 +43,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 0;
   left: 0;
 }
@@ -74,6 +74,24 @@ header {
 .navbar__menu a {
   text-decoration: none;
   color: white;
+}
+
+.navbar__submenu { /* 하위 메뉴 */
+  background-color: var(--accent-color);
+  list-style: none;
+  position: absolute;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 0;
+  display: none;
+}
+
+.navbar__review:hover .navbar__submenu {
+  display: flex;
+}
+
+.navbar__submenu li:hover {
+  background-color: var(--tooltip-color);
 }
 
 header i {
@@ -245,7 +263,6 @@ header i {
 }
 
 .graph__pie {
-  /*background: conic-gradient(var(--line-color) 0deg 120deg, var(--circle-color) 120deg);*/
   width: 310px;
   height: 310px;
   border-radius: 50%;
@@ -407,7 +424,7 @@ header i {
 
   .hidden__bg {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0px;
     right: 0px;
     width: 50%;
@@ -431,7 +448,6 @@ header i {
   }
   
   .navbar__menu li:hover {
-    /* background-color: rgba(74, 139, 204, 0.5); */
     background: none;
     font-size: 18px;
   }
@@ -441,12 +457,44 @@ header i {
     color: white;
   }
 
-  .tooltip {
-    right: 70px;
+  .navbar__submenu {
+    flex-direction: column;
+    list-style: none;
+    position: static;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0);
   }
 
-  .navbar__menu.active,
+  .navbar__submenu li:hover {
+    font-size: 18px;
+  }
+
+  .tooltip {
+    right: 70px;
+    z-index: 4;
+  }
+
+  .tooltip.active {
+    position: fixed;
+  }
+
   .hidden__bg.active {
     display: flex;
+    z-index: 3;
+  }
+
+  .navbar__menu.active {
+    display: flex;
+    position: fixed;
+  }
+
+  #profile.active {
+    position: fixed;
+    right: 56px;
+  }
+
+  #toggleBtn.active {
+    position: fixed;
+    right: 30px;
   }
 }

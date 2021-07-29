@@ -9,6 +9,7 @@
 body{
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 600;
+	min-width: 900px;
 }
 
 table td{
@@ -45,26 +46,25 @@ table th {
 }
 
 #toprank {
-	display: inline-block;
-	/* border: 1px solid green; */
+	display: block;
 	width: 70%;
 	text-align: center;
 	position: relative;
 	margin : auto;
 	top: 100px;
+	min-width: 500px;
 }
 
-#top2 {
-	
-}
 #allrank {
-	display: flex;
+	display: block;
 	justify-content: center;
-	/* border: 1px solid red; */
 	left: 20%;
 	margin-top: 80px;
+	margin-left: auto;
+	margin-right:auto;
 	padding-bottom: 40px; 
 	padding-top:40px;
+	min-width: 750px;
 }
 /* 
 #etcrank {

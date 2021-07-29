@@ -8,14 +8,13 @@
 
     /* 세션에 저장해둔 사용자 id값 가져오기 */
     session_start();
-    $id = $_SESSION;
-    $id = implode("", $id);
+    $id = $_SESSION['userId'];
 
     $password = $_POST['PW'];
 
     // DB 정보 가져오기
-    //$sql = "SELECT * FROM user_info WHERE id ='{$id}'";
-    $sql = "SELECT * FROM user_info WHERE id =194";
+    $sql = "SELECT * FROM user_info WHERE id ='{$id}'";
+    //$sql = "SELECT * FROM user_info WHERE id =194";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
     $hashedPassword = $row['pw'];

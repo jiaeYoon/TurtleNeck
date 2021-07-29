@@ -7,9 +7,25 @@
   mysqli_query($conn, "set session character_set_client=utf8;");
 
   /* 세션에 저장해둔 사용자 id값 가져오기 */
+  // session_start();
+  // if (isset($_SESSION['userId']))
+  // {
+  //   echo "로그인 상태입니다.";
+  //   $id = $_SESSION['userId'];
+  // }
+  // else
+  // {
+  // ? >
+  // <script>
+  // alert("세션이 만료되어있거나 비회원입니다.");
+  // location.href = "../index.html";
+  // </script>
+  // <?php
+  // }   
+
+  /* 세션 값 가져오기 */
   session_start();
-  $id = $_SESSION;
-  $id = implode("", $id);
+  $id = $_SESSION['userId'];
   
   /* main.html에서 버튼 값 받아옴 */
   $exercise = $_GET["exercise"];
@@ -17,16 +33,16 @@
   // shoulder, neck_shoulder, arm_shoulder, pelvic
   switch($exercise){
       case "ex1":
-        $e_name = 'neck_shoulder';
-        break;
-      case "ex2":
         $e_name = 'shoulder';
         break;
+      case "ex2":
+          $e_name = 'neck_shoulder';
+          break;
       case "ex3":
-        $e_name = 'arm_shoulder';
+        $e_name = 'pelvic';
         break;
       case "ex4":
-        $e_name = 'pelvic';
+          $e_name = 'arm_shoulder';
         break;                   
   }
 
@@ -66,18 +82,36 @@
     <!-- 헤더 -->
     <header>
       <img id="wave" src="../img/sea.svg" alt="wave">
-      <!-- 로고 이미지를 클릭하면 마이페이지로 이동 -->
-      <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
-      <!-- 로그아웃 -->
-      <i class="fas fa-user-circle" id="profile"></i>
-      <!-- 말풍선 -->
+      <nav class="navbar">
+        <a href="../main/main.php"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <ul class="navbar__menu">
+          <li><a href="../challenge/challenge.php">30일 챌린지</a></li>
+          <li class="navbar__review"><a href="../review/hospital.php">리뷰</a>
+            <ul class="navbar__submenu">
+              <li><a href="../review/hospital.php">병원 리뷰</a></li>
+              <li><a href="../review/item.php">제품 리뷰</a></li>
+            </ul>
+          </li>
+          <li><a href="../stats/stats.php">통계</a></li>
+          <li><a href="../ranking/ranking.php">랭킹</a></li>
+        </ul>
+        <div class="navbar__btn">
+          <i class="fas fa-user-circle" id="profile"></i>
+          <!-- toggle menu -->
+          <i class="fas fa-bars" id="toggleBtn"></i>
+        </div>
+      </nav>
+      <!-- tooltip -->
       <div class="tooltip">
-        <!-- 나중에 회원정보 추가하기 -->
-        <a href="../main/main.html">마이 페이지</a>
+        <a href="../stats/stats.php">통계</a>
+        <a href="../modify/auth.php">정보 수정</a>
         <hr/>
         <a href="../signup/logoutProcess.php">로그아웃</a>
       </div>
     </header>
+
+    <!-- hideen background -->
+    <div class="hidden__bg"></div>
 
     <!-- 본문 -->
     <main>
@@ -141,12 +175,25 @@
   <script>
     'use strict';
 
-    // tooltip
-    const profile = document.querySelector('#profile');
+    /* header buttons(profile, menu bar) */
+    const toggleBtn = document.querySelector('#toggleBtn');
+    const profileBtn = document.querySelector('#profile');
+
+    const menu = document.querySelector('.navbar__menu');
+    const hidden_box = document.querySelector('.hidden__bg');
     const tooltip = document.querySelector('.tooltip');
-    profile.addEventListener("click", () => {
+
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      hidden_box.classList.toggle('active');
+      toggleBtn.classList.toggle('active');
+      profileBtn.classList.toggle('active');
+    });
+
+    profileBtn.addEventListener('click', () => {
       tooltip.classList.toggle('active');
     });
+
 
     /* 웹캠 출력 */
     var video = document.querySelector("#video");

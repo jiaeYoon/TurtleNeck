@@ -23,26 +23,35 @@
 </head>
 <body>
 	<!-- header -->
-	<header>
-		<img id="wave" src="../img/sea.svg" alt="wave"> 
-		<nav class="navbar">
-			<a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
-			<ul class="navbar__menu">
-			<li><a href="">30일 챌린지</a></li>
-			<li><a href="">커뮤니티</a></li>
-			<li><a href="">마이페이지</a></li>
-			<li><a href="">정보 수정</a></li>
-			</ul>
-			<i class="fas fa-user-circle" id="profile"></i>
-		</nav>
-		<!-- tooltip -->
-		<div class="tooltip">
-			<a href="../main/main.html">마이 페이지</a>
-			<a href="../main/main.html">정보 수정</a>
-			<hr/>
-			<a href="../signup/logoutProcess.php">로그아웃</a>
-		</div>
-	</header>
+    <header>
+      <img id="wave" src="../img/sea.svg" alt="wave"> 
+      <nav class="navbar">
+        <a href="../main/main.html"><img id="logo" src="../img/turtleneck_logo.svg" alt="logo"></a>
+        <ul class="navbar__menu">
+          <li><a href="">30일 챌린지</a></li>
+          <li class="navbar__review"><a href="">리뷰</a>
+            <ul class="navbar__submenu">
+              <li><a href="../review/hospital.html">병원 리뷰</a></li>
+              <li><a href="../review/item.html">제품 리뷰</a></li>
+            </ul>
+          </li>
+          <li><a href="">마이페이지</a></li>
+          <li><a href="">정보 수정</a></li>
+        </ul>
+        <div class="navbar__btn">
+          <i class="fas fa-user-circle" id="profile"></i>
+          <!-- toggle menu -->
+          <i class="fas fa-bars" id="toggleBtn"></i>
+        </div>
+      </nav>
+      <!-- tooltip -->
+      <div class="tooltip">
+        <a href="../main/main.html">마이 페이지</a>
+        <a href="../main/main.html">정보 수정</a>
+        <hr/>
+        <a href="../signup/logoutProcess.php">로그아웃</a>
+      </div>
+    </header>
 
 	<!-- title -->
 	<div class="title">
