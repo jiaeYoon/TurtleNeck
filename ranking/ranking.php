@@ -35,12 +35,14 @@
   $result = mysqli_query($conn, $sql);
   while($row = mysqli_fetch_row($result))
   {
-    $rank_name[$i] = $row[1];
-    $rank_count[$i] = $row[2];
-
+    if ($i < 10)
+    {
+      $rank_name[$i] = $row[1];
+      $rank_count[$i] = $row[2];
+    }
     if ($row[0] == $id)
     {
-      $myrank = $i;
+      $myrank = $i+ 1;
       $mycount = $row[2];
     }
     $i++;
@@ -108,17 +110,18 @@
     </div>
 
     <!-- 상위권 3위-->
-      <div id="toprank">
-        <div id="top2" class="rectangles"><?=$rank_name[1]?><br>
-          <img class="profiles" src="../img/profile/1.png"><div class="inside">2등</div>
-        </div>
-        <div id="top1" class="rectangles"><?=$rank_name[0]?><br>
-          <img class="profiles" src="../img/profile/1.png"><div class="inside" id="first">1등</div>
-        </div>
-        <div id="top3" class="rectangles"><?=$rank_name[2]?><br>
-          <img class="profiles" src="../img/profile/1.png"><div class="inside">3등</div>
-        </div>
+    <div id="toprank">
+      <div id="top2" class="rectangles"><?=$rank_count[1]?> <br><?=$rank_name[1]?><br>
+        <img class="profiles" src="../img/profile/1.png"><div class="inside" id="second">2등</div>
       </div>
+      <div id="top1" class="rectangles"><?=$rank_count[0]?> <br><?=$rank_name[0]?><br>
+        <img class="profiles" src="../img/profile/1.png"><div class="inside" id="first">1등
+          <img id="image" src="https://image.flaticon.com/icons/png/512/3132/3132778.png" width="50"></div>
+      </div>
+      <div id="top3" class="rectangles"><?=$rank_count[2]?> <br><?=$rank_name[2]?><br>
+        <img class="profiles" src="../img/profile/1.png"><div class="inside">3등</div>
+      </div>
+    </div>
 
     <!-- 상위권 10위-->
     <div id="allrank">
